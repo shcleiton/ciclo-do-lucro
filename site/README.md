@@ -30,9 +30,9 @@ npm run og           # regenera og.jpg e favicons (usa o Chromium do Playwright)
 
 ## Pendências (marcadas com `TODO` no código)
 
-- [ ] Número de WhatsApp: `WHATSAPP_NUMBER` em `src/data/site.ts`
+- [x] Número de WhatsApp
 - [ ] Fonte Suissnord e logo SVG: `@font-face` em `global.css` e `src/components/Logo.astro`
-- [ ] Instagram, LinkedIn e e-mail: `social` em `src/data/site.ts` (vazio não aparece)
+- [ ] LinkedIn e e-mail: `social` em `src/data/site.ts` (vazio não aparece)
 - [ ] Resultados e depoimentos autorizados: `src/components/Proof.astro`
 - [ ] ID do GA4: `GA4_ID` em `src/data/site.ts` (liga o banner de cookies sozinho)
 - [ ] Preços da mockup de vendas: `src/components/Pieces.astro`

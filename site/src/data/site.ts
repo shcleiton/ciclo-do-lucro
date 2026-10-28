@@ -1,17 +1,16 @@
 // Configuração única do site. Tudo que depende do Cleiton fica aqui, marcado com TODO.
 
-// TODO: número de WhatsApp do Cleiton, só dígitos com DDI e DDD (ex.: 5511999999999).
-export const WHATSAPP_NUMBER = 'TODO_NUMERO';
+// WhatsApp do Cleiton, só dígitos com DDI e DDD.
+export const WHATSAPP_NUMBER = '5521982812061';
 export const WHATSAPP_MESSAGE = 'Oi Cleiton, vi o Ciclo do Lucro e quero conversar sobre um lançamento.';
 export const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 // TODO: ID de medição do GA4 (ex.: G-XXXXXXXXXX). Vazio = GA4 desligado e nenhum banner de cookies.
-// O Vercel Analytics roda sempre: não usa cookies, então não pede consentimento.
 export const GA4_ID = '';
 
-// TODO: Instagram, LinkedIn e e-mail do rodapé. Campos vazios não aparecem na página.
+// TODO: LinkedIn e e-mail do rodapé. Campos vazios não aparecem na página.
 export const social = {
-  instagram: '',
+  instagram: 'https://www.instagram.com/cleitonramos.mkt/',
   linkedin: '',
   email: '',
 };
