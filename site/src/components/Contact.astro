@@ -1,15 +1,32 @@
 ---
-import { whatsappUrl } from '../data/site';
+import { whatsappUrl, WHATSAPP_MESSAGE } from '../data/site';
+import cleiton from '../assets/cleiton.webp';
+const send = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 3-9 9M21 3l-6 18-3-9-9-3z"/></svg>';
 ---
 <section id="contato" class="ct" aria-labelledby="contato-h">
   <div class="wrap">
-    <div>
-      <h2 id="contato-h">Quer ver esse ciclo rodando no seu produto?</h2>
+    <div data-rv>
+      <h2 id="contato-h">Quer ver esse ciclo no seu produto?</h2>
       <p class="lead">Me chama no WhatsApp e conta o que você quer lançar. A gente começa pela concepção.</p>
     </div>
-    <a class="btn btn-primary" href={whatsappUrl} target="_blank" rel="noopener" data-track="whatsapp_click" data-where="contato">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z" /><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" /></svg>
-      Conversar no WhatsApp
-    </a>
+
+    <!-- A conversa já aberta: a mensagem pronta e o botão que a envia pelo link real do WhatsApp. -->
+    <div class="ct-chat" data-ui>
+      <div class="ct-chat-h" aria-hidden="true">
+        <img src={cleiton.src} width={cleiton.width} height={cleiton.height} alt="" loading="lazy" decoding="async" />
+        <span><b>Cleiton Ramos</b><small>CR CODE</small></span>
+      </div>
+      <div class="ct-chat-body" aria-hidden="true">
+        <span class="ct-day">Hoje</span>
+      </div>
+      <div class="ct-draft">
+        <p class="ct-field"><span class="sr-only">Mensagem que será enviada: </span>{WHATSAPP_MESSAGE}</p>
+        <a class="ct-send" href={whatsappUrl} target="_blank" rel="noopener" data-track="whatsapp_click" data-where="chat" aria-label="Enviar a mensagem no WhatsApp"><Fragment set:html={send} /></a>
+      </div>
+      <a class="btn btn-primary ct-btn" href={whatsappUrl} target="_blank" rel="noopener" data-track="whatsapp_click" data-where="contato">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z" /><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" /></svg>
+        Conversar no WhatsApp
+      </a>
+    </div>
   </div>
 </section>

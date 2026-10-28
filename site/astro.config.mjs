@@ -1,15 +1,14 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// URL pública usada nas tags Open Graph (o preview do WhatsApp exige URL absoluta).
-// TODO: domínio (ex.: ciclodolucro.com.br). Até lá, a Vercel injeta o domínio de produção do projeto.
-const site =
-  process.env.SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:4321');
+// A página vive em https://cleitonramos.com.br/ciclodolucro: o projeto principal do domínio
+// reescreve /ciclodolucro/* para este projeto, que serve tudo sob o mesmo prefixo.
+const site = process.env.SITE_URL || 'https://cleitonramos.com.br';
 
 export default defineConfig({
   site,
+  base: '/ciclodolucro',
   trailingSlash: 'ignore',
-  build: { inlineStylesheets: 'always' },
+  build: { inlineStylesheets: 'always', assets: '_astro' },
   compressHTML: true,
 });

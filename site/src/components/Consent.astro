@@ -1,10 +1,11 @@
 ---
 import { GA4_ID } from '../data/site';
+import { withBase } from '../data/paths';
 // Só existe quando há GA4 configurado. Nada do Google carrega antes do aceite.
 ---
 {GA4_ID && (
   <div class="cs" id="cs" role="dialog" aria-live="polite" aria-label="Cookies de medição" hidden>
-    <p>Usamos cookies de medição do Google Analytics para entender como a página é lida. Você escolhe. <a href="/privacidade">Saiba mais</a></p>
+    <p>Usamos cookies de medição do Google Analytics para entender como a página é lida. Você escolhe. <a href={withBase('privacidade')}>Saiba mais</a></p>
     <div class="cs-row">
       <button class="btn" type="button" data-cs="no">Recusar</button>
       <button class="btn" type="button" data-cs="yes">Aceitar</button>

@@ -1,5 +1,6 @@
 ---
 import { social } from '../data/site';
+import { withBase } from '../data/paths';
 // TODO: Instagram, LinkedIn e e-mail em src/data/site.ts. Links vazios não aparecem.
 const links = [
   social.instagram && { href: social.instagram, label: 'Instagram' },
@@ -9,10 +10,13 @@ const links = [
 ---
 <footer class="ft">
   <div class="wrap">
-    <span><b>CR CODE</b> · Cleiton Ramos</span>
-    <nav aria-label="Contato e informações">
-      {links.map((l) => <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noopener">{l.label}</a>)}
-      <a href="/privacidade">Política de privacidade</a>
-    </nav>
+    <span class="ft-name" translate="no" aria-hidden="true">CR <span>CODE</span></span>
+    <div class="ft-row">
+      <span><b translate="no">CR CODE</b> · <span translate="no">Cleiton Ramos</span></span>
+      <nav aria-label="Contato e informações">
+        {links.map((l) => <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noopener">{l.label}</a>)}
+        <a href={withBase('privacidade')}>Política de privacidade</a>
+      </nav>
+    </div>
   </div>
 </footer>

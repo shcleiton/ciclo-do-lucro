@@ -17,22 +17,27 @@ const icons = [
 ---
 <section id="stack" class="paper" aria-labelledby="stack-h">
   <div class="wrap">
-    <div class="head">
-      <h2 id="stack-h">As camadas técnicas antes do primeiro anúncio.</h2>
+    <div class="head" data-rv>
+      <h2 id="stack-h">A base técnica antes do anúncio.</h2>
       <p class="lead">Tudo isso precisa estar configurado e conversando entre si. Se o rastreamento falha aqui, o tráfego roda no escuro o lançamento inteiro. O especialista só libera acessos e aprova.</p>
     </div>
-    <div class="stk-cols" aria-hidden="true"><span>Camada</span><span>O que precisa existir</span><span>Por que importa</span></div>
-    <ul class="stk-list">
-      {stack.map(([name, what, why], i) => (
-        <li class="stk-row">
-          <span class="stk-nm">
-            <span class="stk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={icons[i]} /></span>
-            <span>{name}</span>
-          </span>
-          <span class="stk-what"><span class="sr-only">O que precisa existir: </span>{what}</span>
-          <span class="stk-why"><span class="sr-only">Por que importa: </span>{why}</span>
-        </li>
-      ))}
-    </ul>
+    <table class="stk">
+      <caption class="sr-only">Camadas técnicas do lançamento: o que precisa existir e por que importa</caption>
+      <thead><tr><th scope="col">Camada</th><th scope="col">O que precisa existir</th><th scope="col">Por que importa</th></tr></thead>
+      <tbody>
+        {stack.map(([name, what, why], i) => (
+          <tr>
+            <th scope="row">
+              <span class="stk-nm">
+                <span class="stk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={icons[i]} /></span>
+                <span>{name}</span>
+              </span>
+            </th>
+            <td class="stk-what">{what}</td>
+            <td class="stk-why">{why}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   </div>
 </section>

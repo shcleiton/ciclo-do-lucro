@@ -29,7 +29,7 @@ const nodes = stages.map((s, i) => {
 const a0 = (-140 * Math.PI) / 180;
 const trail = `M${(CX + R * Math.cos(a0)).toFixed(1)} ${(CY + R * Math.sin(a0)).toFixed(1)} A${R} ${R} 0 0 1 ${CX} ${CY - R}`;
 ---
-<figure class="cy" aria-labelledby="cy-cap">
+<figure class="cy hero-rise-2" aria-labelledby="cy-cap">
   <div class="cy-art">
   <!-- Cometa numa camada própria: gira o elemento inteiro (composto na GPU), sem repintar o SVG. -->
   <svg class="cy-comet" viewBox={VB} aria-hidden="true" style={`transform-origin:${(((CX - vb[0]) / vb[2]) * 100).toFixed(2)}% ${(((CY - vb[1]) / vb[3]) * 100).toFixed(2)}%`}>
@@ -65,5 +65,10 @@ const trail = `M${(CX + R * Math.cos(a0)).toFixed(1)} ${(CY + R * Math.sin(a0)).
     ))}
   </svg>
   </div>
-  <figcaption id="cy-cap">Toque numa etapa para ir até ela.</figcaption>
+  <figcaption>
+    <span id="cy-cap">Toque numa etapa para ir até ela.</span>
+    <button class="cy-pause" type="button" id="cy-pause" aria-pressed="false" aria-label="Pausar o movimento do anel">
+      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z" /></svg>
+    </button>
+  </figcaption>
 </figure>
