@@ -1,0 +1,15 @@
+---
+// Caso real do briefing: mesma oferta, mesmo preço, mesmos professores.
+const BEFORE = 33;
+const AFTER = 116;
+interface Props { intro: string }
+const { intro } = Astro.props;
+---
+<figure class="pv-case" data-pv style="margin:0">
+  <p>{intro}</p>
+  <div class="pv-bars" role="img" aria-label={`Vendas por lançamento: ${BEFORE} sem aquecimento, ${AFTER} com aquecimento.`}>
+    <div class="pv-bar" aria-hidden="true"><span>Sem aquecimento</span><div class="pv-t"><div class="pv-f" style={`width:${((BEFORE / AFTER) * 100).toFixed(2)}%`}></div></div><span class="pv-v">{BEFORE}</span></div>
+    <div class="pv-bar is-after" aria-hidden="true"><span>Com aquecimento</span><div class="pv-t"><div class="pv-f" style="width:100%"></div></div><span class="pv-v">{AFTER}</span></div>
+  </div>
+  <figcaption class="pv-unit">Vendas por lançamento</figcaption>
+</figure>

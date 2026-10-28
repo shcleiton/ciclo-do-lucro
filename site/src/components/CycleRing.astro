@@ -1,0 +1,69 @@
+---
+import { stages } from '../data/content';
+
+// Geometria do anel. As 7 etapas no sentido horário, a partir do topo.
+const CX = 300, CY = 250, R = 150, LR = 172;
+// Recorte justo do desenho, medido com os rótulos no tamanho do celular (o maior).
+const VB = '40 36 602 412';
+const vb = VB.split(' ').map(Number);
+const nodes = stages.map((s, i) => {
+  const th = ((-90 + (i * 360) / stages.length) * Math.PI) / 180;
+  const c = Math.cos(th), sn = Math.sin(th);
+  const lx = CX + LR * c;
+  const ly = CY + LR * sn;
+  const anchor = c > 0.2 ? 'start' : c < -0.2 ? 'end' : 'middle';
+  // rótulo de cima sobe; os de baixo descem; os laterais centram na linha
+  const ty = sn < -0.9 ? ly - 8 : sn > 0.5 ? ly + 26 : ly + 8;
+  const href = 'tab' in s.target ? '#fases' : `#${s.target.section}`;
+  return {
+    ...s,
+    dx: +(CX + R * c).toFixed(1),
+    dy: +(CY + R * sn).toFixed(1),
+    lx: +lx.toFixed(1),
+    ty: +ty.toFixed(1),
+    anchor,
+    href,
+    tab: 'tab' in s.target ? s.target.tab : '',
+  };
+});
+const a0 = (-140 * Math.PI) / 180;
+const trail = `M${(CX + R * Math.cos(a0)).toFixed(1)} ${(CY + R * Math.sin(a0)).toFixed(1)} A${R} ${R} 0 0 1 ${CX} ${CY - R}`;
+---
+<figure class="cy" aria-labelledby="cy-cap">
+  <div class="cy-art">
+  <!-- Cometa numa camada própria: gira o elemento inteiro (composto na GPU), sem repintar o SVG. -->
+  <svg class="cy-comet" viewBox={VB} aria-hidden="true" style={`transform-origin:${(((CX - vb[0]) / vb[2]) * 100).toFixed(2)}% ${(((CY - vb[1]) / vb[3]) * 100).toFixed(2)}%`}>
+    <defs>
+      <linearGradient id="cy-grad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#2E8C85" stop-opacity="0" />
+        <stop offset="1" stop-color="#A8E6D9" />
+      </linearGradient>
+    </defs>
+    <path d={trail} fill="none" stroke="url(#cy-grad)" stroke-width="4" stroke-linecap="round" />
+    <circle cx={CX} cy={CY - R} r="5" fill="#EAF3F1" />
+  </svg>
+  <svg id="cy-svg" viewBox={VB} role="group" aria-label="Ciclo do Lucro em 7 etapas: concepção, posicionamento, aquecimento, captação, evento, venda e retenção, voltando ao início">
+    <circle class="cy-ring" cx={CX} cy={CY} r={R} />
+    <g aria-hidden="true">
+      <text class="cy-t" x={CX} y={CY - 32} text-anchor="middle">Ciclo</text>
+      <text class="cy-t" x={CX} y={CY + 10} text-anchor="middle">do Lucro</text>
+      <text class="cy-s" x={CX} y={CY + 40} text-anchor="middle">CR CODE</text>
+      <text class="cy-d" id="cy-detail" x={CX} y={CY + 78} text-anchor="middle">7 etapas, um ciclo</text>
+    </g>
+    {nodes.map((n) => (
+      <a
+        class:list={['cy-node', { 'is-pos': n.id === 'posicionamento' }]}
+        href={n.href}
+        data-tab={n.tab || undefined}
+        data-term={n.term}
+        aria-label={`${n.name}, ${n.term}`}
+      >
+        <circle class="cy-hit" cx={n.dx} cy={n.dy} r="24" />
+        <circle class="cy-dot" cx={n.dx} cy={n.dy} r="8" />
+        <text class="cy-label" x={n.lx} y={n.ty} text-anchor={n.anchor}>{n.name}</text>
+      </a>
+    ))}
+  </svg>
+  </div>
+  <figcaption id="cy-cap">Toque numa etapa para ir até ela.</figcaption>
+</figure>

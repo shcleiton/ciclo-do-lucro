@@ -1,0 +1,29 @@
+---
+import { posDefs, posThread } from '../data/content';
+---
+<section id="posicionamento" class="pos-sec" aria-labelledby="pos-h">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="pos-h">O posicionamento corta o projeto inteiro.</h2>
+      <p class="lead">Ele começa logo depois da concepção e só termina depois do carrinho. É o que responde por que alguém paga para ouvir esse especialista, e não outro. Cada anúncio, página, aula e mensagem sai dele.</p>
+    </div>
+    <div class="pos-band"><div class="pos-band-bar" aria-hidden="true"></div><p class="pos-band-k"><span>Dia 11, logo depois da concepção</span><span>Até depois do carrinho</span></p></div>
+    <div class="pos-defs">
+      {posDefs.map((p) => (
+        <div class="pos-def">
+          <h3>{p.name}</h3>
+          <p>{p.text}</p>
+          <p class="pos-ask">{p.ask}</p>
+        </div>
+      ))}
+    </div>
+    <div class="pos-thread-wrap">
+      <h3>Como o posicionamento aparece em cada fase</h3>
+      <ol class="pos-thread">
+        {posThread.map((t) => (
+          <li class:list={{ 'is-origin': t.origin }}><b>{t.title}</b><span>{t.phase}</span></li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

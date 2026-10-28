@@ -1,0 +1,113 @@
+---
+import ProofBars from './ProofBars.astro';
+
+const tabs = [
+  ['concepcao', 'Concepção'],
+  ['setup', 'Setup e produção'],
+  ['execucao', 'Execução'],
+  ['monitoramento', 'Monitoramento'],
+  ['depois', 'Depois do carrinho'],
+];
+---
+<section id="fases" aria-labelledby="fases-h">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="fases-h">Cinco fases. Cada uma prepara a próxima.</h2>
+    </div>
+    <div class="ph-scroll">
+      <div class="ph-tabs" role="tablist" aria-label="Fases do lançamento" id="ph-tabs">
+        <span class="ph-pill" id="ph-pill" aria-hidden="true"></span>
+        {tabs.map(([id, label], i) => (
+          <button class="ph-tab" type="button" role="tab" id={`ph-t-${id}`} aria-controls={`ph-p-${id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-tab={id}>{label}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-concepcao" aria-labelledby="ph-t-concepcao" tabindex="0">
+      <div class="ph-intro">
+        <h3>Nada é produzido antes do TAP aprovado.</h3>
+        <p class="ph-when">Dias 1 a 10</p>
+        <p>A fase fecha entre o dia 7 e o dia 10, com o Termo de Abertura do Projeto assinado. Tudo o que vem depois sai dele.</p>
+        <p>O especialista participa das reuniões de extração. Delas saem as histórias, os casos e as opiniões que viram conteúdo e copy.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Avatar</b><span>Quem compra: momento de vida, dor principal, o que já tentou.</span></li>
+        <li><b>Oferta</b><span>Formato, entregáveis, bônus, garantia e condição de pagamento.</span></li>
+        <li><b>Tese de posicionamento</b><span>Categoria, ouro e mecanismo único do especialista. Daqui ela vira frente contínua, do dia 11 ao fim. <a href="#posicionamento">Ver como</a></span></li>
+        <li><b>Big Idea</b><span>A ideia central que amarra toda a comunicação do lançamento.</span></li>
+        <li><b>Mapa do funil</b><span>Cada etapa, página e mensagem, na ordem em que o público passa por elas.</span></li>
+        <li><b>Metas em 3 níveis</b><span>Conservador, realista e otimista para leads, presença no evento e vendas.</span></li>
+        <li><b>Orçamento de mídia</b><span>Verba total e divisão entre aquecimento, captação e remarketing.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-setup" aria-labelledby="ph-t-setup" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>Stack configurado e nove frentes produzindo em paralelo.</h3>
+        <p class="ph-when">Do dia 11 ao fim da semana 5</p>
+        <p>Cada página e anúncio passa por um checklist de 5 a 9 itens antes de ir ao ar.</p>
+        <p>A frente Expert é a que depende do tempo do especialista. O restante é operação da CR CODE.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Infraestrutura</b><span>11 camadas técnicas, do domínio ao CRM. <a href="#stack">Ver as camadas</a></span></li>
+        <li><b>Produção</b><span>146 entregas em 9 frentes, de copy a infraestrutura. <a href="#producao">Ver as frentes</a></span></li>
+        <li><b>Checklist</b><span>De 5 a 9 itens por página e por anúncio antes de ir ao ar.</span></li>
+        <li><b>Teste</b><span>Nenhuma peça sobe sem revisão no celular e no computador.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-execucao" aria-labelledby="ph-t-execucao" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>Sete etapas em sequência. A primeira é a que mais gente pula.</h3>
+        <p class="ph-when">Semanas 4 a 9</p>
+        <p>O aquecimento apresenta o especialista a quem ainda não o conhece. O público chega ao evento sabendo quem ele é.</p>
+        <ProofBars intro="Numa escola de pós-graduação, acrescentar o aquecimento mudou o resultado com a mesma oferta, o mesmo preço e os mesmos professores." />
+      </div>
+      <ol class="ph-steps">
+        <li><div><b>Aquecimento</b><span class="ph-d">14 a 21 dias</span><p>Conteúdo do especialista distribuído com tráfego para quem ainda não o conhece.</p></div></li>
+        <li><div><b>Captação</b><span class="ph-d">10 a 14 dias</span><p>Anúncios levando para a inscrição no evento gratuito. Cada inscrito entra no grupo de WhatsApp e na lista de e-mail.</p></div></li>
+        <li><div><b>Confirmação de presença</b><p>Lembretes no grupo e por e-mail, conteúdo de antecipação e remarketing. Inscrito que não aparece não compra.</p></div></li>
+        <li><div><b>Evento</b><span class="ph-d">3 aulas ao vivo</span><p>Aula 1 abre o problema, aula 2 mostra o caminho, aula 3 prepara a decisão.</p></div></li>
+        <li><div><b>Pré-venda</b><p>Condição para quem sinaliza interesse antes da abertura do carrinho.</p></div></li>
+        <li><div><b>Carrinho aberto</b><span class="ph-d">5 a 7 dias</span><p>Pitch ao vivo, página de vendas, WhatsApp e e-mail, remarketing e atendimento até a última chamada.</p></div></li>
+        <li><div><b>Onboarding</b><p>Boas-vindas, acesso à área de membros e primeiro encontro da turma.</p></div></li>
+      </ol>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-monitoramento" aria-labelledby="ph-t-monitoramento" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>Os números são lidos todo dia contra as metas do TAP.</h3>
+        <p class="ph-when">Todo dia, do primeiro anúncio ao fim do carrinho</p>
+        <p>Custo por lead acima do limite pede ajuste no mesmo dia, em criativo ou em público. O especialista recebe um resumo diário com três cenários.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Custo por lead</b><span>Se a verba vai render inscritos suficientes.</span></li>
+        <li><b>Conversão da captura</b><span>Se a promessa do evento está clara.</span></li>
+        <li><b>Grupos de WhatsApp</b><span>Entrada e atividade: se o inscrito chegou e está engajado.</span></li>
+        <li><b>Presença ao vivo</b><span>Se o aquecimento e os lembretes funcionaram.</span></li>
+        <li><b>Conversão da venda</b><span>Se a oferta convence.</span></li>
+        <li><b>Vendas por dia de carrinho</b><span>Ritmo para bater a meta até a última chamada.</span></li>
+        <li><b>Custo por aluno</b><span>Quanto custou cada matrícula.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-depois" aria-labelledby="ph-t-depois" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>O carrinho fecha. O trabalho continua.</h3>
+        <p class="ph-when">Depois que o carrinho fecha</p>
+        <p>É aqui que o lançamento vira ciclo. Aluno bem recebido fica, gera resultado e vira prova para a próxima turma.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Retenção</b><span>Primeiros acessos, presença nos encontros, pedidos de reembolso. Recuperar quem esfria.</span></li>
+        <li><b>Prova social</b><span>Resultados e depoimentos dos primeiros alunos para a próxima turma.</span></li>
+        <li><b>Debriefing</b><span>O que deu bom, o que melhorar, o que corrigir.</span></li>
+        <li><b>Próxima entrada</b><span>Nova turma por lançamento ou funil perpétuo.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initPhases } from '../scripts/phases';
+  initPhases();
+</script>

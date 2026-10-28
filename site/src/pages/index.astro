@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Cycle from '../components/Cycle.astro';
+import Timeline from '../components/Timeline.astro';
+import Calendar from '../components/Calendar.astro';
+import Positioning from '../components/Positioning.astro';
+import Phases from '../components/Phases.astro';
+import Quote from '../components/Quote.astro';
+import Stack from '../components/Stack.astro';
+import Production from '../components/Production.astro';
+import Pieces from '../components/Pieces.astro';
+import Roles from '../components/Roles.astro';
+import Proof from '../components/Proof.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import Consent from '../components/Consent.astro';
+---
+<Base>
+  <Header />
+  <main id="conteudo">
+    <Hero />
+    <Cycle />
+    <Timeline />
+    <Calendar />
+    <Positioning />
+    <Phases />
+    <Quote />
+    <Stack />
+    <Production />
+    <Pieces />
+    <Roles />
+    <Proof />
+    <Contact />
+  </main>
+  <Footer />
+  <Consent />
+</Base>
+
+<script>
+  import { initRing } from '../scripts/ring';
+  import { initNav } from '../scripts/nav';
+  initRing();
+  initNav();
+</script>
