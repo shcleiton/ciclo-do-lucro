@@ -15,7 +15,8 @@ export default async function handler(request) {
     headers: {
       'content-type': 'text/html; charset=utf-8',
       'cache-control': 'public, max-age=0, must-revalidate',
-      'cdn-cache-control': 'max-age=86400, stale-while-revalidate=604800',
+      // Vercel-CDN-Cache-Control fica só na borda deste projeto; o domínio principal não guarda cópia velha.
+      'vercel-cdn-cache-control': 'max-age=86400, stale-while-revalidate=604800',
     },
   });
 }
