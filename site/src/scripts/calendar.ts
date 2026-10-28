@@ -18,11 +18,11 @@ export function initCalendar() {
     });
     current = i;
     const d = i + 1;
-    const p = phases.find((x) => d >= x.from && d <= x.to)!;
-    const parts = [notes[d], p.desc, d >= posFrom ? 'Posicionamento ativo.' : ''].filter(Boolean);
+    const ps = phases.filter((x) => d >= x.from && d <= x.to);
+    const parts = [notes[d], ...ps.map((p) => p.desc), d >= posFrom ? 'Posicionamento ativo.' : ''].filter(Boolean);
     read!.textContent = '';
     const b = document.createElement('b');
-    b.textContent = `Dia ${d} · ${p.name}`;
+    b.textContent = `Dia ${d} · ${ps.map((p) => p.name).join(' + ')}`;
     const s = document.createElement('span');
     s.textContent = parts.join(' ');
     read!.append(b, s);

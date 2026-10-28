@@ -431,6 +431,7 @@ body::before {
 .cal-key span { display: inline-flex; align-items: center; gap: 8px; }
 .cal-key i { display: inline-block; width: 26px; height: 3px; border-radius: 2px; background: var(--glass); }
 .cal-key i.dot { width: 6px; height: 6px; border-radius: 50%; }
+.cal-key i.split { width: 14px; height: 14px; border-radius: 4px; background: linear-gradient(135deg, #2E8C85 50%, #6FBFAF 50%); }
 @media (max-width: 860px) {
   .cal-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "copy" "box" "read"; }
   .cal-box { margin-top: 36px; }
