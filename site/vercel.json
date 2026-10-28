@@ -1,11 +1,32 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "redirects": [{ "source": "/", "destination": "/ciclodolucro/", "permanent": false }],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/ciclodolucro/",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/ciclodolucro/_astro/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/ciclodolucro",
+      "destination": "/"
+    },
+    {
+      "source": "/ciclodolucro/:path*",
+      "destination": "/:path*"
     }
   ]
 }
