@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/ciclodolucro", "destination": "/api/page?p=index" },
+    { "source": "/ciclodolucro/", "destination": "/api/page?p=index" },
+    { "source": "/ciclodolucro/privacidade", "destination": "/api/page?p=privacidade" },
+    { "source": "/ciclodolucro/privacidade/", "destination": "/api/page?p=privacidade" }
+  ],
+  "redirects": [{ "source": "/", "destination": "/ciclodolucro/", "permanent": false }]
+}

@@ -46,11 +46,27 @@ rewrite, o script dele seria pedido ao projeto principal do domínio, não a est
 
 ## Publicação
 
-A página é um projeto Vercel próprio (`ciclodolucro`) que serve tudo sob `/ciclodolucro/`. O projeto
-principal do domínio (`cleitonramos`) reescreve `/ciclodolucro` e `/ciclodolucro/*` para ele, do mesmo
-jeito que já faz com `/captacao`. Publicar uma nova versão do Ciclo do Lucro nunca mexe no site principal.
+No ar em **https://cleitonramos.com.br/ciclodolucro**. O projeto principal do domínio (`cleitonramos`)
+reescreve `/ciclodolucro`, `/ciclodolucro/` e `/ciclodolucro/*` para `https://ciclodolucro-crcode.vercel.app`,
+domínio de produção do projeto Vercel `ciclodolucro` (mesmo padrão do `/captacao`).
 
-```bash
-npm run build                      # gera dist/ com o prefixo /ciclodolucro
-# publicar dist/ no projeto "ciclodolucro" como produção, com os arquivos sob ciclodolucro/
-```
+### Como está publicado hoje (sem integração Git)
+
+A Vercel ainda não consegue ler este repositório: falta conectar o GitHub como Login Connection na conta.
+Por isso a publicação atual funciona assim:
+
+- `site/cdn/_astro` e `site/cdn/og.jpg`: CSS, JS, fonte, foto e imagem OG, servidos pelo jsDelivr
+  fixado por commit (`ASSETS_PREFIX` no build).
+- `site/cdn/pages`: o HTML das duas páginas, já apontando para esses assets.
+- `site/vercel-proxy`: o que está no projeto `ciclodolucro`. Uma função de borda busca o HTML no jsDelivr,
+  entrega como `text/html` e deixa em cache na Vercel.
+
+Para publicar uma nova versão nesse modo: build com `ASSETS_PREFIX` apontando para um commit que já tenha
+a fonte, copiar `dist/_astro` para `cdn/_astro`, commit, trocar o commit no HTML e em `vercel-proxy/api/page.js`,
+commit de novo e republicar o projeto `ciclodolucro`.
+
+### Quando o GitHub estiver conectado na Vercel
+
+Ligar o projeto `ciclodolucro` ao repositório, com raiz `site`, build `npm run build:vercel` e saída `out`
+(sem `ASSETS_PREFIX`). Tudo passa a ser servido pelo próprio domínio e cada push publica sozinho.
+Depois disso, `site/cdn` e `site/vercel-proxy` podem ser apagados.
