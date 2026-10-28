@@ -1,0 +1,1 @@
+const a=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches,r=()=>a()?"auto":"smooth";function c(s,o,t,i){const e=s._swapT;if(e&&clearTimeout(e),!i||a()){t(),s.classList.remove(o);return}s.classList.add(o),s._swapT=window.setTimeout(()=>{t(),s.classList.remove(o)},120)}export{c as a,a as r,r as s};

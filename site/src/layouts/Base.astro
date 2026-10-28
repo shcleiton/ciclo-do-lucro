@@ -10,7 +10,7 @@ interface Props {
 }
 const { title = meta.title, description = meta.description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL(withBase('og.jpg'), Astro.site);
+const ogImage = process.env.ASSETS_PREFIX ? `${process.env.ASSETS_PREFIX}/og.jpg` : new URL(withBase('og.jpg'), Astro.site);
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -40,6 +40,7 @@ const ogImage = new URL(withBase('og.jpg'), Astro.site);
     <meta property="og:image:alt" content="O anel do Ciclo do Lucro, com as sete etapas, sobre o fundo azul petróleo da CR CODE." />
     <meta name="twitter:card" content="summary_large_image" />
 
+    {process.env.ASSETS_PREFIX && <link rel="preconnect" href={new URL(process.env.ASSETS_PREFIX).origin} crossorigin />}
     <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
     <!-- Marca a página como "com script" antes da pintura: as revelações só escondem algo quando há JS. -->
     <script is:inline>document.documentElement.classList.add('js');</script>
