@@ -9,6 +9,6 @@ export default defineConfig({
   site,
   base: '/ciclodolucro',
   trailingSlash: 'ignore',
-  build: { inlineStylesheets: 'always', assets: '_astro' },
+  build: { inlineStylesheets: 'never', assets: '_astro' },
   compressHTML: true,
 });

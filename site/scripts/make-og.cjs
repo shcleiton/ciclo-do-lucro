@@ -6,7 +6,7 @@ const fs = require('fs');
 const os = require('os');
 
 const pub = path.join(__dirname, '..', 'public');
-const font = 'file://' + path.join(pub, 'fonts', 'archivo-latin.woff2');
+const font = 'file://' + path.join(__dirname, '..', 'src', 'assets', 'fonts', 'archivo-latin.woff2');
 const stages = ['Concepção', 'Posicionamento', 'Aquecimento', 'Captação', 'Evento', 'Venda', 'Retenção'];
 
 function ring(cx, cy, R, LR) {
@@ -52,7 +52,7 @@ svg{position:absolute;right:0;top:0}
   fs.writeFileSync(tmp, og);
   await p.goto('file://' + tmp, { waitUntil: 'load' });
   await p.evaluate(() => document.fonts.ready);
-  await p.screenshot({ path: path.join(pub, 'og.jpg'), type: 'jpeg', quality: 88 }); // WhatsApp ignora imagens acima de ~300 KB
+  await p.screenshot({ path: path.join(pub, 'og.jpg'), type: 'jpeg', quality: 80 }); // WhatsApp ignora imagens acima de ~300 KB
   const svg = fs.readFileSync(path.join(pub, 'favicon.svg'), 'utf8');
   for (const [size, name] of [[32, 'favicon-32.png'], [180, 'apple-touch-icon.png']]) {
     const q = await b.newPage({ viewport: { width: size, height: size } });
