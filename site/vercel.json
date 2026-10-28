@@ -22,11 +22,15 @@
   "rewrites": [
     {
       "source": "/ciclodolucro",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/ciclodolucro/",
-      "destination": "/index.html"
+      "destination": "/"
+    },
+    {
+      "source": "/ciclodolucro/privacidade/",
+      "destination": "/privacidade"
     },
     {
       "source": "/ciclodolucro/:path+",
