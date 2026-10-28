@@ -2,7 +2,7 @@
 // O HTML vem do repositório público, fixado por commit no jsDelivr, e fica em cache na borda.
 export const config = { runtime: 'edge' };
 
-const SRC = 'https://cdn.jsdelivr.net/gh/shcleiton/cmo@4adb7888648a6a4d67284acf7da3335743864e6c/site/cdn/pages/';
+const SRC = 'https://cdn.jsdelivr.net/gh/shcleiton/cmo@4d92461c507038400560c43739ff0e44db8551f2/site/cdn/pages/';
 const PAGES = { index: 'index.html', privacidade: 'privacidade.html' };
 
 export default async function handler(request) {
