@@ -22,11 +22,15 @@
   "rewrites": [
     {
       "source": "/ciclodolucro",
-      "destination": "/"
+      "destination": "/index.html"
     },
     {
-      "source": "/ciclodolucro/:path*",
-      "destination": "/:path*"
+      "source": "/ciclodolucro/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ciclodolucro/:path+",
+      "destination": "/:path+"
     }
   ]
 }
