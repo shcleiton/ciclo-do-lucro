@@ -1,0 +1,27 @@
+---
+import { stages } from '../data/content';
+---
+<section id="ciclo" class="ccl-sec" aria-labelledby="ciclo-h">
+  <div class="wrap">
+    <div class="head" data-rv><h2 id="ciclo-h">Sete etapas. Cada uma alimenta a seguinte.</h2></div>
+  </div>
+  <div class="wrap ccl-grid">
+    <div class="ccl-copy" data-rv>
+      <p class="lead">O lançamento termina quando o aluno entra. O ciclo continua. Quem entrou vira prova para a próxima turma, e a próxima turma custa menos para encher.</p>
+    </div>
+    <div class="ccl-rail">
+    <svg class="ccl-back" viewBox="0 0 12 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 5 5-5 5" /></svg>
+    <ol class="ccl-list" data-rv>
+      {stages.map((s) => (
+        <li class:list={['ccl-item', { 'is-pos': s.id === 'posicionamento' }]}>
+          <div>
+            <h3>{s.name}</h3>
+            <span class="ccl-term">{s.term}</span>
+          </div>
+          <p>{s.line}</p>
+        </li>
+      ))}
+    </ol>
+    </div>
+  </div>
+</section>

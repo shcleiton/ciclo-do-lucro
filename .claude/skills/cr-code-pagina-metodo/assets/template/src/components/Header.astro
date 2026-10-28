@@ -1,0 +1,27 @@
+---
+import Logo from './Logo.astro';
+import { whatsappUrl } from '../data/site';
+
+const links = [
+  ['#ciclo', 'O ciclo'],
+  ['#linha', 'Linha do tempo'],
+  ['#calendario', 'Dia a dia'],
+  ['#posicionamento', 'Posicionamento'],
+  ['#fases', 'Fases'],
+  ['#stack', 'Stack'],
+  ['#producao', 'Produção'],
+  ['#pecas', 'Peças'],
+  ['#papeis', 'Papéis'],
+];
+---
+<header class="hd">
+  <div class="wrap hd-in">
+    <a class="hd-mark" href="#topo" aria-label="Ciclo do Lucro, CR CODE, voltar ao topo">
+      <Logo /><span translate="no" style="color:inherit">CR <span>CODE</span></span>
+    </a>
+    <nav class="hd-nav" aria-label="Seções">
+      {links.map(([href, label]) => <a href={href}>{label}</a>)}
+    </nav>
+    <a class="btn btn-primary hd-cta" href={whatsappUrl} target="_blank" rel="noopener" data-track="whatsapp_click" data-where="header">Conversar</a>
+  </div>
+</header>

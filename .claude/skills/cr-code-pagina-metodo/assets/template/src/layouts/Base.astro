@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import fontUrl from '../assets/fonts/archivo-latin.woff2?url';
+import { meta, GA4_ID } from '../data/site';
+import { withBase } from '../data/paths';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = meta.title, description = meta.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = process.env.ASSETS_PREFIX ? `${process.env.ASSETS_PREFIX}/og.jpg` : new URL(withBase('og.jpg'), Astro.site);
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#03354E" />
+    <meta name="color-scheme" content="dark" />
+
+    <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={withBase('favicon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={withBase('apple-touch-icon.png')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="CR CODE" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="O anel do Ciclo do Lucro, com as sete etapas, sobre o fundo azul petróleo da CR CODE." />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {process.env.ASSETS_PREFIX && <link rel="preconnect" href={new URL(process.env.ASSETS_PREFIX).origin} crossorigin />}
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <!-- Marca a página como "com script" antes da pintura: as revelações só escondem algo quando há JS. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body data-ga={GA4_ID || undefined}>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "redirects": [{ "source": "/", "destination": "/ciclodolucro/", "permanent": false }],
+  "headers": [
+    {
+      "source": "/ciclodolucro/_astro/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

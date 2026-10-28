@@ -1,0 +1,25 @@
+---
+import ProofBars from './ProofBars.astro';
+import cleiton from '../assets/cleiton.webp';
+---
+<section id="prova" class="pv-sec" aria-labelledby="prova-h">
+  <div class="wrap pv-grid">
+    <div>
+      <div class="head" style="margin-bottom:0" data-rv>
+        <h2 id="prova-h">De onde vem o método.</h2>
+        <p class="lead">O Ciclo do Lucro foi construído a partir de mais de 40 lançamentos de infoprodutos.</p>
+      </div>
+      <div class="pv-who">
+        <figure class="pv-photo"><img src={cleiton.src} width={cleiton.width} height={cleiton.height} alt="Cleiton Ramos, de terno escuro, olhando o celular" loading="lazy" decoding="async" /></figure>
+        <p><b translate="no">Cleiton Ramos</b><span><span translate="no">CR CODE</span></span></p>
+      </div>
+    </div>
+    <ProofBars intro="Numa escola de pós-graduação, acrescentar a etapa de aquecimento levou um lançamento de 33 para 116 vendas, com a mesma oferta, o mesmo preço e os mesmos professores." />
+    {/* TODO: outros resultados e depoimentos que o Cleiton autorizar. */}
+  </div>
+</section>
+
+<script>
+  import { initProofBars } from '../scripts/proof';
+  initProofBars();
+</script>

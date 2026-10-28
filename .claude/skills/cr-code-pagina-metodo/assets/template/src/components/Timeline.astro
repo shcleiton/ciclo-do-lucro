@@ -1,0 +1,68 @@
+---
+import { lanes, weeks, laneActive } from '../data/content';
+const w1 = weeks[0];
+---
+<section id="linha" class="tl-sec" aria-labelledby="linha-h">
+  <div class="wrap">
+    <div class="tl-top">
+      <div class="head" data-rv>
+        <h2 id="linha-h">Nove semanas, frentes em paralelo.</h2>
+        <p class="lead">Arraste pela linha ou toque numa semana para ver o que acontece em cada momento do lançamento.</p>
+      </div>
+      <div class="tl-ctrl">
+        <button class="btn btn-icon" type="button" id="tl-prev" aria-label="Semana anterior">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5" /></svg>
+        </button>
+        <span class="tl-readout" id="tl-readout">Semana 1 de 9</span>
+        <button class="btn btn-icon" type="button" id="tl-next" aria-label="Próxima semana">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3 5 5-5 5" /></svg>
+        </button>
+        <button class="btn btn-primary" type="button" id="tl-play" aria-pressed="false">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" id="tl-play-ic"><path d="M4 2.5v11l9-5.5z" /></svg>
+          <span id="tl-play-lbl">Percorrer</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="tl" id="tl" data-weeks={JSON.stringify(weeks)} data-lanes={JSON.stringify(lanes)}>
+      <div class="tl-row tl-head">
+        <div class="tl-name" aria-hidden="true"></div>
+        <div class="tl-track" role="group" aria-label="Escolher semana. Use as setas do teclado para avançar ou voltar.">
+          {weeks.map((_, i) => (
+            <button class="tl-wk" type="button" data-w={i + 1} aria-pressed={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}><span>S{i + 1}<span class="sr-only"> (semana {i + 1})</span></span></button>
+          ))}
+        </div>
+      </div>
+      <div class="tl-lanes" id="tl-lanes">
+        {lanes.map((l) => (
+          <div class:list={['tl-row', { 'is-pos': l.kind === 'pos', 'is-cart': l.kind === 'cart', 'is-active': laneActive(l, 1) }]}>
+            <div class="tl-name">{l.name}</div>
+            <div class="tl-track" aria-hidden="true">
+              <div class="tl-bar" style={`grid-column:${l.hs} / ${l.he + 1}`}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="tl-scrub-layer" aria-hidden="true"><div class="tl-scrub" id="tl-scrub"></div></div>
+    </div>
+
+    <div class="tl-note">
+      <div class="tl-num" id="tl-num" aria-hidden="true">S1</div>
+      <div class="tl-txt" id="tl-txt" aria-live="polite">
+        <h3><span class="sr-only" id="tl-sr">Semana 1: </span><span id="tl-title">{w1.title}</span></h3>
+        <div class="tl-chips" id="tl-chips" aria-label="Frentes ativas">
+          {lanes.filter((l) => laneActive(l, 1) && l.kind !== 'pos').map((l) => (
+            <span class:list={['tl-chip', { 'is-cart': l.kind === 'cart' }]}>{l.name}</span>
+          ))}
+        </div>
+        <p class="tl-body" id="tl-body">{w1.body}</p>
+        <p class="tl-pos"><b>Posicionamento</b><span id="tl-pos">{w1.pos}</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initTimeline } from '../scripts/timeline';
+  initTimeline();
+</script>

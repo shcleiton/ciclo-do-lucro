@@ -1,0 +1,227 @@
+---
+// Seis peças da jornada do aluno. Telas reconhecíveis pela forma, sem logos de marcas.
+// O especialista é genérico: inicial "E", nome "Especialista". Todos os textos são ilustrativos.
+const pieces = [
+  { id: 'anuncio', when: 'S2 a S7', name: 'Anúncio de aquecimento' },
+  { id: 'captura', when: 'S4 a S7', name: 'Página de captura' },
+  { id: 'grupo', when: 'S4 a S8', name: 'Grupo de WhatsApp' },
+  { id: 'aula', when: 'S8', name: 'Aula ao vivo' },
+  { id: 'vendas', when: 'S8 e S9', name: 'Página de vendas' },
+  { id: 'boasvindas', when: 'S9', name: 'Boas-vindas' },
+];
+const lock = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+const back = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>';
+const wave = [6, 12, 18, 10, 16, 20, 8, 14, 18, 12, 6, 10, 16, 20, 14, 8, 12, 18, 10, 6, 12, 16];
+---
+<section id="pecas" class="mk-sec" aria-labelledby="pecas-h">
+  <div class="wrap">
+    <div class="head" data-rv>
+      <h2 id="pecas-h">Como as peças chegam ao público.</h2>
+      <p class="lead">Seis peças da jornada do aluno, na ordem em que ele encontra cada uma. Os textos são ilustrativos. Em cada projeto, a copy sai da tese de posicionamento do especialista.</p>
+    </div>
+    <div class="mk-grid">
+      <ol class="mk-steps" role="tablist" aria-label="Peças da jornada" aria-orientation="vertical" id="mk-steps">
+        {pieces.map((p, i) => (
+          <li role="presentation">
+            <button type="button" class="mk-step" role="tab" id={`mk-t-${p.id}`} aria-controls={`mk-p-${p.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
+              <small>{p.when}</small><b>{p.name}</b>
+            </button>
+          </li>
+        ))}
+      </ol>
+
+      <div class="mk-stage">
+        <!-- 1. Anúncio de aquecimento: post patrocinado no feed -->
+        <div class="mk-panel" role="tabpanel" id="mk-p-anuncio" aria-labelledby="mk-t-anuncio">
+          <div class="mk-art" aria-hidden="true" data-ui>
+            <span class="mk-tag">Exemplo ilustrativo</span>
+            <div class="mk-phone"><div class="mk-notch"></div><div class="mk-screen mk-feed">
+              <div class="mk-fd-top"><span>Feed</span><span class="mk-fd-ic"><i></i><i></i></span></div>
+              <div class="mk-post">
+                <div class="mk-post-h"><span class="mk-av">E</span><div><b>Especialista</b><small>Patrocinado</small></div><span class="mk-more">···</span></div>
+                <p class="mk-post-t">Depois de anos atendendo, percebi que o erro mais caro acontece antes de começar.</p>
+                <div class="mk-media">
+                  <span class="mk-media-k">Vídeo · 2 min</span>
+                  <span class="mk-media-h">O erro mais caro acontece antes de começar.</span>
+                  <span class="mk-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></span>
+                </div>
+                <div class="mk-post-cta"><span>Assista ao vídeo completo</span><span class="mk-cta-b">Assistir</span></div>
+                <div class="mk-acts">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z" /></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m21 3-9 9M21 3l-6 18-3-9-9-3z" /></svg>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="mk-cap">
+            <h3><span class="sr-only">Exemplo ilustrativo: </span>Anúncio de aquecimento</h3>
+            <p>Apresenta o especialista a quem ainda não o conhece, antes de pedir qualquer coisa. Uma ideia forte contada pela lente do mecanismo.</p>
+            <dl><dt>Frentes</dt><dd>Copy, Vídeos, Tráfego</dd><dt>Mede</dt><dd>Alcance, visualização, custo por público aquecido</dd></dl>
+          </div>
+        </div>
+
+        <!-- 2. Página de captura -->
+        <div class="mk-panel" role="tabpanel" id="mk-p-captura" aria-labelledby="mk-t-captura" hidden>
+          <div class="mk-art" aria-hidden="true" data-ui>
+            <span class="mk-tag">Exemplo ilustrativo</span>
+            <div class="mk-browser">
+              <div class="mk-bz"><i></i><i></i><i></i><span class="mk-url"><Fragment set:html={lock} />seudominio.com.br/aula</span></div>
+              <div class="mk-page mk-cap-page">
+                <div>
+                  <span class="mk-kick">Aula gratuita ao vivo · 3 encontros</span>
+                  <h4>O erro mais caro acontece antes de começar</h4>
+                  <p>Em três aulas, o Especialista mostra onde a maioria erra e o caminho que ele usa com os próprios clientes.</p>
+                  <div class="mk-form">
+                    <span class="mk-fld">Nome</span>
+                    <span class="mk-fld">E-mail</span>
+                    <span class="mk-fld">WhatsApp</span>
+                    <span class="mk-sub">Quero participar</span>
+                    <small>Usamos seus dados só para enviar os avisos das aulas, conforme a LGPD. Você pode sair quando quiser.</small>
+                  </div>
+                </div>
+                <div class="mk-portrait"><span>E</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="mk-cap">
+            <h3><span class="sr-only">Exemplo ilustrativo: </span>Página de captura</h3>
+            <p>Transforma o clique em inscrito no evento gratuito. Pede o WhatsApp junto com o e-mail, porque no Brasil é o grupo que sustenta a presença ao vivo.</p>
+            <dl><dt>Frentes</dt><dd>Páginas, Copy, Infra</dd><dt>Mede</dt><dd>Conversão e custo por lead</dd></dl>
+          </div>
+        </div>
+
+        <!-- 3. Grupo de WhatsApp (só de avisos) -->
+        <div class="mk-panel" role="tabpanel" id="mk-p-grupo" aria-labelledby="mk-t-grupo" hidden>
+          <div class="mk-art" aria-hidden="true" data-ui>
+            <span class="mk-tag">Exemplo ilustrativo</span>
+            <div class="mk-phone"><div class="mk-notch"></div><div class="mk-screen mk-chat-scr">
+              <div class="mk-ch-h">
+                <Fragment set:html={back} />
+                <span class="mk-grp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2" /><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 5.2a3 3 0 0 1 0 5.6M17.5 14a5 5 0 0 1 3 5" /></svg></span>
+                <div><b>Aula ao vivo · Turma 1</b><small>Grupo de avisos</small></div>
+              </div>
+              <div class="mk-ch-body">
+                <span class="mk-day">Segunda</span>
+                <div class="mk-msg"><em>Especialista</em>Boas-vindas! Aqui você recebe os avisos das três aulas. Fique de olho.<time>09:12</time></div>
+                <span class="mk-day">Hoje</span>
+                <div class="mk-msg"><em>Especialista</em>Hoje às 20h tem a aula 1. Deixe o link salvo:<span class="mk-link">seudominio.com.br/aula</span><time>10:03</time></div>
+                <div class="mk-msg">
+                  <em>Especialista</em>
+                  <div class="mk-audio">
+                    <span class="mk-pl"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></span>
+                    <span class="mk-wave">{wave.map((h) => <i style={`height:${h}px`}></i>)}</span>
+                    <span>0:42</span>
+                  </div>
+                  <time>18:30</time>
+                </div>
+                <div class="mk-msg"><em>Especialista</em>Faltam 30 minutos. Começo pelo erro que mais vejo.<time>19:30</time></div>
+              </div>
+              <div class="mk-ch-foot">Só administradores podem enviar mensagens</div>
+            </div></div>
+          </div>
+          <div class="mk-cap">
+            <h3><span class="sr-only">Exemplo ilustrativo: </span>Grupo de WhatsApp</h3>
+            <p>Leva o inscrito até a sala. Grupo só de avisos: o especialista fala, ninguém se perde em conversa paralela. Inscrito que não aparece não compra.</p>
+            <dl><dt>Frentes</dt><dd>E-mails e WhatsApp</dd><dt>Mede</dt><dd>Entrada no grupo e presença ao vivo</dd></dl>
+          </div>
+        </div>
+
+        <!-- 4. Aula ao vivo -->
+        <div class="mk-panel" role="tabpanel" id="mk-p-aula" aria-labelledby="mk-t-aula" hidden>
+          <div class="mk-art" aria-hidden="true" data-ui>
+            <span class="mk-tag">Exemplo ilustrativo</span>
+            <div class="mk-call">
+              <div class="mk-call-bar"><span class="mk-live">AO VIVO</span><b>Aula 1 de 3</b><span class="mk-call-t">42:18</span></div>
+              <div class="mk-call-main">
+                <div class="mk-slide">
+                  <span class="mk-sl-k">Aula 1 · O problema</span>
+                  <span class="mk-sl-h">Onde o resultado se perde antes de começar</span>
+                  <span class="mk-sl-bars"><i style="width:82%"></i><i style="width:64%"></i><i style="width:40%"></i></span>
+                  <span class="mk-pip">E<small>Especialista</small></span>
+                </div>
+                <div class="mk-cchat">
+                  <b>Comentários</b>
+                  <p><b>Ana</b>Foi exatamente o que aconteceu comigo.</p>
+                  <p><b>Marcos</b>Vai ter replay?</p>
+                  <p><b>Paula</b>Faz muito sentido.</p>
+                </div>
+              </div>
+              <div class="mk-people"><span>AM</span><span>MR</span><span>PS</span><span>DL</span><span>JT</span><span>+</span></div>
+            </div>
+          </div>
+          <div class="mk-cap">
+            <h3><span class="sr-only">Exemplo ilustrativo: </span>Aula ao vivo</h3>
+            <p>Três aulas. A primeira abre o problema, a segunda mostra o caminho, a terceira prepara a decisão. Slides e roteiro saem da CR CODE; o especialista ensaia e apresenta.</p>
+            <dl><dt>Frentes</dt><dd>Expert, Design, Copy</dd><dt>Mede</dt><dd>Presença, tempo na sala, comentários</dd></dl>
+          </div>
+        </div>
+
+        <!-- 5. Página de vendas. TODO: preços reais do projeto ("12x de R$ TODO" e "R$ TODO à vista no Pix"). -->
+        <div class="mk-panel" role="tabpanel" id="mk-p-vendas" aria-labelledby="mk-t-vendas" hidden>
+          <div class="mk-art" aria-hidden="true" data-ui>
+            <span class="mk-tag">Exemplo ilustrativo</span>
+            <div class="mk-browser">
+              <div class="mk-bz"><i></i><i></i><i></i><span class="mk-url"><Fragment set:html={lock} />seudominio.com.br/inscricao</span></div>
+              <div class="mk-page mk-sale">
+                <div>
+                  <span class="mk-kick">Inscrições abertas · Turma 1</span>
+                  <h4>O método do Especialista, do primeiro passo ao resultado</h4>
+                  <ul class="mk-checks">
+                    <li>Aulas gravadas e encontros ao vivo</li>
+                    <li>Materiais na área de membros</li>
+                    <li>O passo a passo do método</li>
+                  </ul>
+                </div>
+                <div class="mk-price">
+                  <span class="mk-price-k">Inscrição</span>
+                  <span class="mk-price-v">12x de R$ <span class="mk-slot"></span></span>
+                  <span class="mk-price-alt">ou R$ <span class="mk-slot"></span> à vista no Pix</span>
+                  <span class="mk-buy">Quero entrar</span>
+                  <span class="mk-lock"><Fragment set:html={lock} />Compra segura</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mk-cap">
+            <h3><span class="sr-only">Exemplo ilustrativo: </span>Página de vendas</h3>
+            <p>Oferta, parcelamento e Pix na mesma tela. Abre com o pitch ao vivo e fica no ar até a última chamada. O preço é definido em cada projeto.</p>
+            <dl><dt>Frentes</dt><dd>Páginas, Copy, Infra</dd><dt>Mede</dt><dd>Conversão e vendas por dia</dd></dl>
+          </div>
+        </div>
+
+        <!-- 6. Boas-vindas -->
+        <div class="mk-panel" role="tabpanel" id="mk-p-boasvindas" aria-labelledby="mk-t-boasvindas" hidden>
+          <div class="mk-art" aria-hidden="true" data-ui>
+            <span class="mk-tag">Exemplo ilustrativo</span>
+            <div class="mk-phone"><div class="mk-notch"></div><div class="mk-screen mk-mail-scr">
+              <div class="mk-ml-top"><Fragment set:html={back} /><span>Caixa de entrada</span></div>
+              <div class="mk-ml">
+                <h4>Você entrou. Seu primeiro encontro já tem data.</h4>
+                <div class="mk-ml-from"><span class="mk-av sm">E</span><div><b>Especialista</b><small>para você</small></div></div>
+                <p>Oi, Ana. Que bom ter você na turma.</p>
+                <p>Separei o que você precisa para a primeira semana:</p>
+                <div class="mk-ml-box">
+                  <div><span>Acesso</span><b>Área de membros</b></div>
+                  <div><span>Primeiro encontro</span><b>Terça, 20h</b></div>
+                </div>
+                <span class="mk-ml-btn">Acessar a área de membros</span>
+                <p>Até terça,<br />Especialista</p>
+              </div>
+            </div></div>
+          </div>
+          <div class="mk-cap">
+            <h3><span class="sr-only">Exemplo ilustrativo: </span>Boas-vindas</h3>
+            <p>Garante uma boa primeira semana. Quem acessa logo e aparece no primeiro encontro pede menos reembolso e vira prova para a próxima turma.</p>
+            <dl><dt>Frentes</dt><dd>E-mails e WhatsApp, Produto</dd><dt>Mede</dt><dd>Acesso e presença no primeiro encontro</dd></dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initPieces } from '../scripts/pieces';
+  initPieces();
+</script>

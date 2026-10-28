@@ -1,0 +1,65 @@
+---
+import { calPhases, calNotes, POS_FROM_DAY } from '../data/content';
+// Fases podem se sobrepor (aquecimento e captação rodam juntos). Dia com duas fases leva as duas cores.
+const phasesOf = (d: number) => calPhases.filter((p) => d >= p.from && d <= p.to);
+const fill = (ps: typeof calPhases) =>
+  ps.length > 1 ? `linear-gradient(135deg, ${ps[0].color} calc(50% - 0.5px), ${ps[1].color} calc(50% + 0.5px))` : ps[0].color;
+const days = Array.from({ length: 63 }, (_, i) => {
+  const d = i + 1;
+  const ps = phasesOf(d);
+  const pos = d >= POS_FROM_DAY;
+  const col = ((d - 1) % 7) + 1;
+  return {
+    d,
+    ps,
+    pos,
+    first: pos && (d === POS_FROM_DAY || col === 1),
+    last: pos && (col === 7 || d === 63),
+    note: calNotes[d],
+  };
+});
+const weeks = Array.from({ length: 9 }, (_, w) => days.slice(w * 7, w * 7 + 7));
+---
+<section id="calendario" aria-labelledby="cal-h">
+  <div class="wrap cal-grid">
+    <div class="cal-copy">
+      <div class="head" style="margin-bottom:0" data-rv>
+        <h2 id="cal-h">Nove semanas, dia a dia.</h2>
+        <p class="lead">A concepção fecha em 7 a 10 dias. Do dia 11 em diante, o posicionamento corre por baixo de tudo, até o último aluno entrar. O aquecimento começa assim que a concepção fecha e segue até o evento. A captação roda junto com ele por 14, 21 ou 28 dias, conforme a estratégia. Aqui, o plano de 21.</p>
+      </div>
+      <ul class="cal-legend" aria-label="Fases e duração">
+        {calPhases.map((p) => (
+          <li><span class="cal-sw" style={`background:${p.color}`}></span><span>{p.name}</span><span class="cal-len">{p.legend}</span></li>
+        ))}
+      </ul>
+    </div>
+    <div class="cal-box">
+      <div class="cal-dow" aria-hidden="true"><span></span>{[1, 2, 3, 4, 5, 6, 7].map((n) => <span>{n}</span>)}</div>
+      <div class="cal" id="cal" data-phases={JSON.stringify(calPhases)} data-notes={JSON.stringify(calNotes)} data-pos={POS_FROM_DAY}>
+        {weeks.map((wk, w) => (
+          <div class="cal-wk" role="group" aria-label={`Semana ${w + 1}`}>
+            <span class="cal-wl" aria-hidden="true">S{w + 1}</span>
+            {wk.map((x) => (
+              <button
+                type="button"
+                class:list={['cal-day', { 'is-pos': x.pos, 'is-first': x.first, 'is-last': x.last, 'has-note': x.note }]}
+                style={`background:${fill(x.ps)}`}
+                data-d={x.d}
+                aria-pressed="false"
+                aria-label={`Dia ${x.d}, ${x.ps.map((p) => p.name).join(' e ')}${x.note ? `. ${x.note}` : ''}`}
+                tabindex={x.d === 1 ? 0 : -1}
+              >{x.d}{x.note && <span class="cal-dot" aria-hidden="true"></span>}</button>
+            ))}
+          </div>
+        ))}
+      </div>
+      <p class="cal-key"><span><i aria-hidden="true"></i>Posicionamento ativo</span><span><i class="dot" aria-hidden="true"></i>Dia com marco</span><span><i class="split" aria-hidden="true"></i>Fases em paralelo</span></p>
+    </div>
+    <div class="cal-read" id="cal-read" aria-live="polite"><b>Toque num dia</b><span>para ver a fase e o que acontece nele.</span></div>
+  </div>
+</section>
+
+<script>
+  import { initCalendar } from '../scripts/calendar';
+  initCalendar();
+</script>

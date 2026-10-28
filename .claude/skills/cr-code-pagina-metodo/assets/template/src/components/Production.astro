@@ -1,0 +1,47 @@
+---
+import { fronts, FRONTS_TOTAL } from '../data/content';
+const shades = ['#A8E6D9', '#8DD6C9', '#73C4B8', '#5BB1A8', '#479D97', '#378985', '#2A7572', '#21625F', '#1B504E'];
+const f0 = fronts[0];
+---
+<section id="producao" aria-labelledby="prod-h">
+  <div class="wrap">
+    <div class="head" data-rv>
+      <h2 id="prod-h">{FRONTS_TOTAL} entregas em 9 frentes.</h2>
+      <p class="lead">Cada bloco tem a largura do volume de trabalho da frente. Toque num bloco para ver o que inclui.</p>
+    </div>
+    <div class="pr-bar" id="pr-bar" role="group" aria-label="Entregas por frente" data-fronts={JSON.stringify(fronts)}>
+      {fronts.map((f, i) => (
+        <button type="button" class="pr-seg" style={`flex-grow:${f.count};background:${shades[i]}`} data-i={i} aria-pressed={i === 0 ? 'true' : 'false'} aria-label={`${f.name}, ${f.count} entregas`}>
+          {f.count >= 15 && <span aria-hidden="true">{f.name}</span>}
+        </button>
+      ))}
+    </div>
+    <div class="pr-scale" aria-hidden="true"><span>0</span><span>{FRONTS_TOTAL / 2}</span><span>{FRONTS_TOTAL} entregas</span></div>
+    <div class="pr-grid">
+      <ul class="pr-legend" aria-label="Frentes">
+        {fronts.map((f, i) => (
+          <li>
+            <button type="button" data-i={i} aria-pressed={i === 0 ? 'true' : 'false'}>
+              <span class="pr-sw" style={`background:${shades[i]}`}></span>
+              <span>{f.name}</span>
+              <span class="pr-c">{f.count}<small>{Math.round((f.count / FRONTS_TOTAL) * 100)}%</small></span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      <aside class="pr-detail" aria-live="polite">
+        <div class="pr-txt" id="pr-txt">
+          <div class="pr-big"><span id="pr-n">{f0.count}</span><small>entregas</small></div>
+          <h3 id="pr-name">{f0.name}</h3>
+          <p id="pr-body">{f0.body}</p>
+          <p class="pr-who" id="pr-who">{f0.who}</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initProduction } from '../scripts/production';
+  initProduction();
+</script>
