@@ -1,0 +1,23 @@
+---
+// Perguntas mais comuns na página inicial. A lista completa fica em /perguntas-frequentes/.
+import { faqHome } from '../data/faq';
+import { withBase } from '../data/paths';
+const resolve = (h: string) => (h.startsWith('#') ? h : withBase(h));
+---
+<section id="perguntas" class="fq-sec" aria-labelledby="perguntas-h">
+  <div class="wrap fq-grid">
+    <div class="head" data-rv>
+      <h2 id="perguntas-h">Perguntas frequentes sobre o Ciclo do Lucro.</h2>
+      <p class="lead">As dúvidas que mais aparecem antes de um lançamento. <a href={withBase('perguntas-frequentes/')}>Ver todas as perguntas</a></p>
+    </div>
+    <div class="fq-list">
+      {faqHome.map((f) => (
+        <details class="fq">
+          <summary><h3>{f.q}</h3></summary>
+          <p>{f.a}</p>
+          {f.link && <p class="fq-more"><a href={resolve(f.link.href)}>{f.link.label}</a></p>}
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

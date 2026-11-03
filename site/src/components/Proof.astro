@@ -1,18 +1,23 @@
 ---
 import ProofBars from './ProofBars.astro';
 import cleiton from '../assets/cleiton.webp';
+import { dates, author } from '../data/site';
+import { longDate } from '../data/format';
+import { withBase } from '../data/paths';
 ---
 <section id="prova" class="pv-sec" aria-labelledby="prova-h">
   <div class="wrap pv-grid">
     <div>
       <div class="head" style="margin-bottom:0" data-rv>
         <h2 id="prova-h">De onde vem o método.</h2>
-        <p class="lead">O Ciclo do Lucro foi construído a partir de mais de 40 lançamentos de infoprodutos.</p>
+        <p class="lead">O Ciclo do Lucro foi construído a partir de mais de 40 lançamentos de infoprodutos. <a href={withBase('pesquisa/anatomia-de-um-lancamento/')}>Ler a pesquisa com os números do método</a></p>
       </div>
       <div class="pv-who">
         <figure class="pv-photo"><img src={cleiton.src} width={cleiton.width} height={cleiton.height} alt="Cleiton Ramos, de terno escuro, olhando o celular" loading="lazy" decoding="async" /></figure>
-        <p><b translate="no">Cleiton Ramos</b><span><span translate="no">CR CODE</span></span></p>
+        <p><b translate="no">Cleiton Ramos</b><span>{author.role}</span></p>
       </div>
+      <p class="pv-bio">{author.bio}</p>
+      <p class="pv-when">Publicado em <time datetime={dates.home.published}>{longDate(dates.home.published)}</time> · Atualizado em <time datetime={dates.home.modified}>{longDate(dates.home.modified)}</time></p>
     </div>
     <ProofBars intro="Numa escola de pós-graduação, acrescentar a etapa de aquecimento levou um lançamento de 33 para 116 vendas, com a mesma oferta, o mesmo preço e os mesmos professores." />
     {/* TODO: outros resultados e depoimentos que o Cleiton autorizar. */}

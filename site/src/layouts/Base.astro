@@ -1,15 +1,33 @@
 ---
 import '../styles/global.css';
 import fontUrl from '../assets/fonts/archivo-latin.woff2?url';
-import { meta, GA4_ID } from '../data/site';
+import { meta, GA4_ID, canonicalOf, author } from '../data/site';
 import { withBase } from '../data/paths';
 
 interface Props {
   title?: string;
   description?: string;
+  /** Caminho depois de /ciclodolucro/, sem barras (vazio = página inicial). */
+  path?: string;
+  /** JSON-LD da página (schema.org). */
+  schema?: object;
+  published?: string;
+  modified?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
 }
-const { title = meta.title, description = meta.description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const {
+  title = meta.title,
+  description = meta.description,
+  path = '',
+  schema,
+  published,
+  modified,
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+// Um único endereço por página, sempre no domínio principal e com barra final.
+const canonical = canonicalOf(path);
 const ogImage = process.env.ASSETS_PREFIX ? `${process.env.ASSETS_PREFIX}/og.jpg` : new URL(withBase('og.jpg'), Astro.site);
 ---
 <!doctype html>
@@ -19,7 +37,12 @@ const ogImage = process.env.ASSETS_PREFIX ? `${process.env.ASSETS_PREFIX}/og.jpg
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
+    <meta name="author" content={author.name} />
+    <link rel="alternate" hreflang="pt-BR" href={canonical} />
+    <link rel="alternate" type="text/plain" title="Resumo para assistentes de IA" href={withBase('llms.txt')} />
+    <link rel="sitemap" type="application/xml" href={withBase('sitemap.xml')} />
     <meta name="theme-color" content="#03354E" />
     <meta name="color-scheme" content="dark" />
 
@@ -27,7 +50,10 @@ const ogImage = process.env.ASSETS_PREFIX ? `${process.env.ASSETS_PREFIX}/og.jpg
     <link rel="icon" href={withBase('favicon-32.png')} sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href={withBase('apple-touch-icon.png')} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {published && <meta property="article:published_time" content={published} />}
+    {modified && <meta property="article:modified_time" content={modified} />}
+    {ogType === 'article' && <meta property="article:author" content={author.url} />}
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="CR CODE" />
     <meta property="og:title" content={title} />
@@ -44,6 +70,7 @@ const ogImage = process.env.ASSETS_PREFIX ? `${process.env.ASSETS_PREFIX}/og.jpg
     <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
     <!-- Marca a página como "com script" antes da pintura: as revelações só escondem algo quando há JS. -->
     <script is:inline>document.documentElement.classList.add('js');</script>
+    {schema && <script type="application/ld+json" is:inline set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />}
   </head>
   <body data-ga={GA4_ID || undefined}>
     <a class="skip" href="#conteudo">Pular para o conteúdo</a>

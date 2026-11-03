@@ -27,6 +27,7 @@ npm run og           # regenera og.jpg e favicons (usa o Chromium do Playwright)
 | `src/styles/mockups.css` | As telas das peças (fragmentos de interface, com sombra e bordas próprias) |
 | `src/assets/` | Fonte Archivo e o retrato do Cleiton (o mesmo de cleitonramos.com.br) |
 | `design/` | Referências de design (awesome-design-md) e diretrizes da Vercel usadas na revisão |
+| `seo/` | SEO e visibilidade em IA: o que já está feito e os arquivos da raiz do domínio |
 
 ## Pendências (marcadas com `TODO` no código)
 

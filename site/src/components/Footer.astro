@@ -15,7 +15,9 @@ const links = [
       <span><b translate="no">CR CODE</b> · <span translate="no">Cleiton Ramos</span></span>
       <nav aria-label="Contato e informações">
         {links.map((l) => <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noopener">{l.label}</a>)}
-        <a href={withBase('privacidade')}>Política de privacidade</a>
+        <a href={withBase('perguntas-frequentes/')}>Perguntas frequentes</a>
+        <a href={withBase('pesquisa/anatomia-de-um-lancamento/')}>Pesquisa</a>
+        <a href={withBase('privacidade/')}>Política de privacidade</a>
       </nav>
     </div>
   </div>

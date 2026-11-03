@@ -16,8 +16,27 @@ import Proof from '../components/Proof.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import Consent from '../components/Consent.astro';
+import FaqHome from '../components/FaqHome.astro';
+import { stages } from '../data/content';
+import { faqHome } from '../data/faq';
+import { dates, meta } from '../data/site';
+import { graph, orgNode, personNode, siteNode, pageNode, breadcrumbNode, faqNode, methodNode, ids } from '../data/schema';
+
+const d = dates.home;
+const schema = graph(
+  orgNode,
+  personNode,
+  siteNode,
+  pageNode({ path: '', name: meta.title, description: meta.description, published: d.published, modified: d.modified, about: { '@id': ids.method } }),
+  methodNode(stages),
+  breadcrumbNode('', [
+    { name: 'CR CODE', path: null },
+    { name: 'Ciclo do Lucro', path: '' },
+  ]),
+  faqNode('', faqHome),
+);
 ---
-<Base>
+<Base {schema} published={d.published} modified={d.modified}>
   <Header />
   <main id="conteudo">
     <Hero />
@@ -32,6 +51,7 @@ import Consent from '../components/Consent.astro';
     <Pieces />
     <Roles />
     <Proof />
+    <FaqHome />
     <Contact />
   </main>
   <Footer />

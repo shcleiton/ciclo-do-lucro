@@ -1,0 +1,16 @@
+---
+// Assinatura com autor e datas, visível na página (as mesmas datas vão no JSON-LD).
+import { author } from '../data/site';
+import { longDate } from '../data/format';
+import cleiton from '../assets/cleiton.webp';
+interface Props { published: string; modified: string; full?: boolean }
+const { published, modified, full = false } = Astro.props;
+---
+<div class:list={['by', { 'by-full': full }]}>
+  <img class="by-ph" src={cleiton.src} width={cleiton.width} height={cleiton.height} alt={full ? 'Cleiton Ramos, de terno escuro, olhando o celular' : ''} loading="lazy" decoding="async" />
+  <div>
+    <p class="by-who">Por <a href={author.url} rel="author"><span translate="no">{author.name}</span></a><span class="by-role">, {author.role}</span></p>
+    <p class="by-when">Publicado em <time datetime={published}>{longDate(published)}</time>{modified !== published && <> · Atualizado em <time datetime={modified}>{longDate(modified)}</time></>}</p>
+    {full && <p class="by-bio">{author.bio}</p>}
+  </div>
+</div>

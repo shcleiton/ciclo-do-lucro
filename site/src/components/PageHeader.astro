@@ -1,0 +1,24 @@
+---
+// Cabeçalho das páginas internas: volta ao método e liga as páginas entre si.
+import Logo from './Logo.astro';
+import { whatsappUrl } from '../data/site';
+import { withBase } from '../data/paths';
+interface Props { current?: 'faq' | 'pesquisa' | 'privacidade' }
+const { current } = Astro.props;
+const links = [
+  { href: withBase(''), label: 'O método' },
+  { href: withBase('perguntas-frequentes/'), label: 'Perguntas frequentes', key: 'faq' },
+  { href: withBase('pesquisa/anatomia-de-um-lancamento/'), label: 'Pesquisa', key: 'pesquisa' },
+];
+---
+<header class="hd">
+  <div class="wrap hd-in">
+    <a class="hd-mark" href={withBase('')} aria-label="Ciclo do Lucro, CR CODE, página inicial">
+      <Logo /><span translate="no" style="color:inherit">CR <span>CODE</span></span>
+    </a>
+    <nav class="hd-nav" aria-label="Páginas">
+      {links.map((l) => <a href={l.href} aria-current={l.key && l.key === current ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <a class="btn btn-primary hd-cta" href={whatsappUrl} target="_blank" rel="noopener" data-track="whatsapp_click" data-where="header">Conversar</a>
+  </div>
+</header>

@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Byline from '../components/Byline.astro';
+import SourceList from '../components/SourceList.astro';
+import Footer from '../components/Footer.astro';
+import { faqGroups, faqAll } from '../data/faq';
+import { dates, whatsappUrl } from '../data/site';
+import { withBase } from '../data/paths';
+import { graph, orgNode, personNode, siteNode, pageNode, breadcrumbNode, faqNode } from '../data/schema';
+
+const path = 'perguntas-frequentes';
+const title = 'Perguntas frequentes sobre lançamento de infoproduto | CR CODE';
+const description =
+  'Quanto dura um lançamento, quais são as etapas, o que é aquecimento, captação e TAP, quem paga os anúncios e o que o especialista faz no Ciclo do Lucro.';
+const d = dates.faq;
+// Links de âncora levam às seções da página inicial.
+const resolve = (h: string) => (h.startsWith('#') ? withBase('') + h : withBase(h));
+
+const schema = graph(
+  orgNode,
+  personNode,
+  siteNode,
+  pageNode({ path, name: title, description, published: d.published, modified: d.modified, type: 'WebPage' }),
+  breadcrumbNode(path, [
+    { name: 'CR CODE', path: null },
+    { name: 'Ciclo do Lucro', path: '' },
+    { name: 'Perguntas frequentes', path },
+  ]),
+  faqNode(path, faqAll),
+);
+---
+<Base {title} {description} {path} {schema} published={d.published} modified={d.modified}>
+  <PageHeader current="faq" />
+  <main id="conteudo" class="doc">
+    <article class="wrap doc-in">
+      <Breadcrumb trail={[{ name: 'Ciclo do Lucro', href: withBase('') }, { name: 'Perguntas frequentes' }]} />
+      <header class="doc-hd">
+        <h1>Perguntas frequentes sobre o Ciclo do Lucro</h1>
+        <p class="lead">Respostas curtas sobre como funciona um lançamento de infoproduto ou mentoria com o método da <span translate="no">CR CODE</span>: prazos, etapas, ferramentas e o papel de cada um.</p>
+        <Byline published={d.published} modified={d.modified} />
+      </header>
+
+      <nav class="doc-toc" aria-label="Temas">
+        <h2>Temas</h2>
+        <ul>{faqGroups.map((g) => <li><a href={`#${g.id}`}>{g.title}</a></li>)}</ul>
+      </nav>
+
+      {faqGroups.map((g) => (
+        <section id={g.id} class="doc-sec" aria-labelledby={`${g.id}-h`}>
+          <h2 id={`${g.id}-h`}>{g.title}</h2>
+          {g.items.map((f) => (
+            <div class="doc-qa">
+              <h3>{f.q}</h3>
+              <p>{f.a}</p>
+              {f.link && <p class="fq-more"><a href={resolve(f.link.href)}>{f.link.label}</a></p>}
+            </div>
+          ))}
+        </section>
+      ))}
+
+      <section class="doc-sec" aria-labelledby="mais-h">
+        <h2 id="mais-h">Continue lendo</h2>
+        <ul class="doc-links">
+          <li><a href={withBase('')}>O método Ciclo do Lucro completo, com linha do tempo e calendário</a></li>
+          <li><a href={withBase('pesquisa/anatomia-de-um-lancamento/')}>Pesquisa: a anatomia de um lançamento em 146 entregas</a></li>
+          <li><a href={whatsappUrl} target="_blank" rel="noopener" data-track="whatsapp_click" data-where="faq">Falar com o Cleiton Ramos no WhatsApp</a></li>
+        </ul>
+      </section>
+
+      <SourceList ids={['google-senders', 'meta-capi', 'bcb-pix', 'pmbok']} />
+      <Byline published={d.published} modified={d.modified} full />
+    </article>
+  </main>
+  <Footer />
+</Base>

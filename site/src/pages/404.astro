@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Footer from '../components/Footer.astro';
+import { withBase } from '../data/paths';
+---
+<Base title="Página não encontrada · Ciclo do Lucro" description="Este endereço não existe no site do Ciclo do Lucro." noindex>
+  <PageHeader />
+  <main id="conteudo" class="doc">
+    <div class="wrap doc-in">
+      <h1>Página não encontrada</h1>
+      <p class="lead">O endereço mudou ou não existe. Estes são os caminhos do site:</p>
+      <ul class="doc-links">
+        <li><a href={withBase('')}>O método Ciclo do Lucro</a></li>
+        <li><a href={withBase('perguntas-frequentes/')}>Perguntas frequentes</a></li>
+        <li><a href={withBase('pesquisa/anatomia-de-um-lancamento/')}>Pesquisa: anatomia de um lançamento</a></li>
+      </ul>
+    </div>
+  </main>
+  <Footer />
+</Base>

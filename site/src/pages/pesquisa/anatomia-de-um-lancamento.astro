@@ -1,0 +1,202 @@
+---
+// Pesquisa original: os números saem dos dados do próprio método (src/data/content.ts) e do caso
+// autorizado no briefing. Nada aqui é estimado: cada percentual é calculado no build.
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Byline from '../../components/Byline.astro';
+import SourceList from '../../components/SourceList.astro';
+import Footer from '../../components/Footer.astro';
+import { fronts, FRONTS_TOTAL, calPhases, stack } from '../../data/content';
+import { dates, author, canonicalOf, whatsappUrl } from '../../data/site';
+import { withBase } from '../../data/paths';
+import { graph, orgNode, personNode, siteNode, pageNode, breadcrumbNode, ids } from '../../data/schema';
+
+const path = 'pesquisa/anatomia-de-um-lancamento';
+const title = 'Anatomia de um lançamento: 146 entregas em 63 dias | CR CODE';
+const headline = 'Anatomia de um lançamento de infoproduto: o que 146 entregas e 63 dias mostram';
+const description =
+  'Pesquisa com os dados do Ciclo do Lucro: como 146 entregas se dividem em 9 frentes, quanto tempo vai para preparação e um caso de 33 para 116 vendas.';
+const d = dates.pesquisa;
+
+const DAYS = 63;
+const pct = (n: number, t: number) => Math.round((n / t) * 100);
+const phase = (name: string) => calPhases.find((p) => p.name === name)!;
+const len = (p: { from: number; to: number }) => p.to - p.from + 1;
+
+const aq = phase('Aquecimento');
+const cap = phase('Captação');
+const ev = phase('Evento');
+const cart = phase('Carrinho aberto');
+const onb = phase('Onboarding');
+const beforeEvent = ev.from - 1; // dias antes da aula 1
+const posDays = DAYS - 11 + 1; // posicionamento do dia 11 ao fim
+const expert = fronts.find((f) => f.name === 'Expert')!;
+const top3 = fronts.slice(0, 3);
+const top3Sum = top3.reduce((s, f) => s + f.count, 0);
+
+const BEFORE = 33;
+const AFTER = 116;
+const ratio = (AFTER / BEFORE).toFixed(1).replace('.', ',');
+
+const findings = [
+  `Três frentes concentram ${pct(top3Sum, FRONTS_TOTAL)}% do trabalho: copy (${top3[0].count}), vídeos (${top3[1].count}) e tráfego (${top3[2].count}) somam ${top3Sum} das ${FRONTS_TOTAL} entregas.`,
+  `Copy sozinha responde por ${pct(top3[0].count, FRONTS_TOTAL)}% das entregas, mais que qualquer outra frente.`,
+  `O especialista concentra ${expert.count} entregas (${pct(expert.count, FRONTS_TOTAL)}%). As outras ${FRONTS_TOTAL - expert.count} (${100 - pct(expert.count, FRONTS_TOTAL)}%) são operação.`,
+  `${beforeEvent} dos ${DAYS} dias do calendário (${pct(beforeEvent, DAYS)}%) acontecem antes da primeira aula. Evento e carrinho somam ${len(ev) + len(cart)} dias (${pct(len(ev) + len(cart), DAYS)}%).`,
+  `O aquecimento roda por ${len(aq)} dias, ${pct(len(aq), DAYS)}% do calendário, e o posicionamento atravessa ${posDays} dias (${pct(posDays, DAYS)}%).`,
+  `Num caso real, acrescentar o aquecimento levou um lançamento de ${BEFORE} para ${AFTER} vendas, ${ratio} vezes o resultado, sem mudar oferta, preço ou professores.`,
+];
+
+const schema = graph(
+  orgNode,
+  personNode,
+  siteNode,
+  pageNode({ path, name: title, description, published: d.published, modified: d.modified }),
+  {
+    '@type': 'Article',
+    '@id': `${canonicalOf(path)}#article`,
+    headline,
+    description,
+    inLanguage: 'pt-BR',
+    author: { '@id': ids.person },
+    publisher: { '@id': ids.org },
+    datePublished: d.published,
+    dateModified: d.modified,
+    mainEntityOfPage: { '@id': `${canonicalOf(path)}#webpage` },
+    image: `${canonicalOf()}og.jpg`,
+    about: { '@id': ids.method },
+    articleSection: 'Pesquisa',
+    citation: [
+      'https://support.google.com/a/answer/81126',
+      'https://senders.yahooinc.com/best-practices/',
+      'https://developers.facebook.com/docs/marketing-api/conversions-api',
+      'https://support.google.com/analytics/answer/10917952',
+      'https://www.bcb.gov.br/estabilidadefinanceira/pix',
+    ],
+  },
+  {
+    '@type': 'Dataset',
+    '@id': `${canonicalOf(path)}#dados`,
+    name: 'Entregas e calendário de referência do Ciclo do Lucro',
+    description: `Contagem das ${FRONTS_TOTAL} entregas de um lançamento por frente de trabalho e duração de cada fase no calendário de referência de ${DAYS} dias.`,
+    creator: { '@id': ids.person },
+    publisher: { '@id': ids.org },
+    datePublished: d.published,
+    dateModified: d.modified,
+    inLanguage: 'pt-BR',
+    isAccessibleForFree: true,
+    license: 'https://creativecommons.org/licenses/by/4.0/',
+    url: canonicalOf(path),
+    variableMeasured: ['Entregas por frente', 'Dias por fase'],
+  },
+  breadcrumbNode(path, [
+    { name: 'CR CODE', path: null },
+    { name: 'Ciclo do Lucro', path: '' },
+    { name: 'Pesquisa', path },
+  ]),
+);
+---
+<Base {title} {description} {path} {schema} published={d.published} modified={d.modified} ogType="article">
+  <PageHeader current="pesquisa" />
+  <main id="conteudo" class="doc">
+    <article class="wrap doc-in">
+      <Breadcrumb trail={[{ name: 'Ciclo do Lucro', href: withBase('') }, { name: 'Pesquisa' }]} />
+      <header class="doc-hd">
+        <p class="doc-kicker">Pesquisa original</p>
+        <h1>{headline}</h1>
+        <p class="lead">Contamos cada entrega e cada dia de um lançamento conduzido com o <span translate="no">Ciclo do Lucro</span>. O resultado mostra onde está o trabalho de verdade e por que a maior parte dele acontece antes da primeira aula.</p>
+        <Byline published={d.published} modified={d.modified} />
+      </header>
+
+      <section class="doc-sec doc-key" aria-labelledby="resumo-h">
+        <h2 id="resumo-h">Principais achados</h2>
+        <ol>{findings.map((f) => <li>{f}</li>)}</ol>
+      </section>
+
+      <section class="doc-sec" aria-labelledby="metodo-h">
+        <h2 id="metodo-h">Como os dados foram levantados</h2>
+        <p>A base é o checklist de entregas e o calendário de referência do <span translate="no">Ciclo do Lucro</span>, consolidados por {author.name} a partir de mais de 40 lançamentos de infoprodutos. Cada entrega é uma peça ou tarefa com dono e prazo, como uma página, um anúncio, um e-mail ou uma gravação.</p>
+        <p>O calendário de referência tem {DAYS} dias e usa a captação de {len(cap)} dias. Nas versões de 14 ou 28 dias, a captação começa uma semana depois ou antes, e o restante se mantém.</p>
+        <p>O caso de aquecimento é de uma escola de pós-graduação, comparando dois lançamentos com a mesma oferta, o mesmo preço e os mesmos professores. É um caso único, sem grupo de controle, e serve como indício, sem valor de regra geral.</p>
+      </section>
+
+      <section class="doc-sec" aria-labelledby="frentes-h">
+        <h2 id="frentes-h">Onde estão as {FRONTS_TOTAL} entregas</h2>
+        <p>Copy é a frente mais pesada porque quase toda peça tem texto: página, anúncio, e-mail, mensagem de WhatsApp, roteiro e pitch. Vídeos e tráfego vêm em seguida.</p>
+        <div class="doc-table">
+          <table>
+            <caption>Entregas de um lançamento por frente de trabalho</caption>
+            <thead><tr><th scope="col">Frente</th><th scope="col">Entregas</th><th scope="col">Participação</th><th scope="col">Quem faz</th></tr></thead>
+            <tbody>
+              {fronts.map((f) => (
+                <tr><th scope="row">{f.name}</th><td>{f.count}</td><td>{pct(f.count, FRONTS_TOTAL)}%</td><td>{f.who}</td></tr>
+              ))}
+            </tbody>
+            <tfoot><tr><th scope="row">Total</th><td>{FRONTS_TOTAL}</td><td>100%</td><td></td></tr></tfoot>
+          </table>
+        </div>
+        <p>Os percentuais estão arredondados e somam {fronts.reduce((s, f) => s + pct(f.count, FRONTS_TOTAL), 0)}% por causa do arredondamento.</p>
+      </section>
+
+      <section class="doc-sec" aria-labelledby="dias-h">
+        <h2 id="dias-h">Para onde vão os {DAYS} dias</h2>
+        <p>Algumas fases correm em paralelo: o aquecimento começa no dia {aq.from} e segue durante toda a captação. Por isso a soma das linhas passa de {DAYS}.</p>
+        <div class="doc-table">
+          <table>
+            <caption>Duração de cada fase no calendário de referência</caption>
+            <thead><tr><th scope="col">Fase</th><th scope="col">Dias</th><th scope="col">Do dia ao dia</th><th scope="col">Parte do calendário</th></tr></thead>
+            <tbody>
+              {calPhases.map((p) => (
+                <tr><th scope="row">{p.name}</th><td>{len(p)}</td><td>{p.from} a {p.to}</td><td>{pct(len(p), DAYS)}%</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>A venda em si, com {len(ev)} dias de evento e {len(cart)} de carrinho, ocupa {pct(len(ev) + len(cart), DAYS)}% do calendário. O que decide o resultado é preparado nos {beforeEvent} dias anteriores. Depois do carrinho, {len(onb)} dias de onboarding recebem a turma.</p>
+      </section>
+
+      <section class="doc-sec" aria-labelledby="caso-h">
+        <h2 id="caso-h">O efeito do aquecimento: de {BEFORE} para {AFTER} vendas</h2>
+        <p>Aquecimento é a etapa em que o conteúdo do especialista é distribuído com tráfego para quem ainda não o conhece. No caso da escola de pós-graduação, o primeiro lançamento foi direto para a captação e fez {BEFORE} vendas. O seguinte acrescentou o aquecimento e fez {AFTER}, {AFTER - BEFORE} vendas a mais.</p>
+        <figure class="doc-fig">
+          <div class="pv-bars" role="img" aria-label={`Vendas por lançamento: ${BEFORE} sem aquecimento, ${AFTER} com aquecimento.`}>
+            <div class="pv-bar" aria-hidden="true"><span>Sem aquecimento</span><div class="pv-t"><div class="pv-f" style={`width:${((BEFORE / AFTER) * 100).toFixed(2)}%`}></div></div><span class="pv-v">{BEFORE}</span></div>
+            <div class="pv-bar is-after" aria-hidden="true"><span>Com aquecimento</span><div class="pv-t"><div class="pv-f" style="width:100%"></div></div><span class="pv-v">{AFTER}</span></div>
+          </div>
+          <figcaption>Vendas por lançamento, mesma oferta, mesmo preço e mesmos professores.</figcaption>
+        </figure>
+      </section>
+
+      <section class="doc-sec" aria-labelledby="base-h">
+        <h2 id="base-h">A base técnica que precisa existir antes do anúncio</h2>
+        <p>São {stack.length} camadas. Duas delas seguem regras de terceiros que mudam o resultado do lançamento:</p>
+        <ul class="doc-list">
+          <li><b>E-mail autenticado.</b> Google e Yahoo exigem SPF e DKIM, e DMARC para quem envia em volume. Sem isso, a sequência de lembretes do evento cai no spam. <a href="#fonte-google-senders">[1]</a> <a href="#fonte-yahoo-senders">[2]</a></li>
+          <li><b>Rastreamento.</b> Pixel com API de Conversões e parâmetros UTM mostram quanto custa cada lead e cada venda. <a href="#fonte-meta-capi">[3]</a> <a href="#fonte-ga4-utm">[4]</a></li>
+          <li><b>Pagamento.</b> O checkout aceita Pix, o pagamento instantâneo do Banco Central, além de boleto e cartão parcelado. <a href="#fonte-bcb-pix">[5]</a></li>
+        </ul>
+        <p><a href={withBase('#stack')}>Ver as {stack.length} camadas no método</a></p>
+      </section>
+
+      <section class="doc-sec" aria-labelledby="citar-h">
+        <h2 id="citar-h">Como citar esta pesquisa</h2>
+        <p class="doc-cite">{author.name}. {headline}. <span translate="no">CR CODE</span>, {d.published.slice(0, 4)}. Disponível em <a href={canonicalOf(path)}>{canonicalOf(path)}</a>.</p>
+        <p>Os dados podem ser reproduzidos com crédito e link para esta página (licença CC BY 4.0).</p>
+      </section>
+
+      <section class="doc-sec" aria-labelledby="mais-h">
+        <h2 id="mais-h">Continue lendo</h2>
+        <ul class="doc-links">
+          <li><a href={withBase('')}>O método Ciclo do Lucro, com linha do tempo e calendário dia a dia</a></li>
+          <li><a href={withBase('perguntas-frequentes/')}>Perguntas frequentes sobre lançamento de infoproduto</a></li>
+          <li><a href={whatsappUrl} target="_blank" rel="noopener" data-track="whatsapp_click" data-where="pesquisa">Conversar com o Cleiton Ramos no WhatsApp</a></li>
+        </ul>
+      </section>
+
+      <SourceList ids={['google-senders', 'yahoo-senders', 'meta-capi', 'ga4-utm', 'bcb-pix']} />
+      <Byline published={d.published} modified={d.modified} full />
+    </article>
+  </main>
+  <Footer />
+</Base>

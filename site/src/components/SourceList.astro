@@ -1,0 +1,17 @@
+---
+import { sources, type Source } from '../data/sources';
+interface Props { ids?: string[]; heading?: string }
+const { ids, heading = 'Fontes' } = Astro.props;
+const list: Source[] = ids ? ids.map((id) => sources.find((s) => s.id === id)!).filter(Boolean) : sources;
+---
+<section class="src" aria-labelledby="fontes-h">
+  <h2 id="fontes-h">{heading}</h2>
+  <ol>
+    {list.map((s) => (
+      <li id={`fonte-${s.id}`}>
+        <cite><a href={s.url} target="_blank" rel="noopener">{s.title}</a></cite>, {s.publisher}.
+        <span>{s.supports}</span>
+      </li>
+    ))}
+  </ol>
+</section>
