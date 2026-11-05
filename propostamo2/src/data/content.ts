@@ -76,7 +76,7 @@ export const posDefs = [
 export const posThread = [
   { phase: 'Mês 1', title: 'Posicionamento, perfil e acervo organizado', origin: true },
   { phase: 'Mês 1', title: 'Site com mapa e cadastro no ar' },
-  { phase: 'A partir do mês 2', title: 'Cases e depoimentos no perfil' },
+  { phase: 'Desde o mês 1', title: 'Cases e depoimentos no perfil' },
   { phase: 'Todo mês', title: 'Novos creators aprovados no mapa' },
   { phase: 'Todo mês', title: 'Pedidos de marcas pelo site' },
 ];
