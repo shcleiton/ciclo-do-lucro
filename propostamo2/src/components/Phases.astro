@@ -1,0 +1,99 @@
+---
+const tabs = [
+  ['estrutura', 'Estrutura'],
+  ['site', 'Site com mapa'],
+  ['cadastro', 'Cadastro'],
+  ['conteudo', 'Conteúdo mensal'],
+  ['beta', 'Edição com IA'],
+];
+---
+<section id="entregas" aria-labelledby="entregas-h">
+  <div class="wrap">
+    <div class="head" data-rv>
+      <h2 id="entregas-h">O que vamos construir, e como.</h2>
+      <p class="lead">No mês 1, a estrutura e o site. A partir do mês 2, a operação mensal. A produção usa o nosso sistema de conteúdo com IA, que organiza o acervo, sugere pautas e escreve os roteiros. A MO2 grava e aprova.</p>
+    </div>
+    <div class="ph-scroll">
+      <div class="ph-tabs" role="tablist" aria-label="Entregas" id="ph-tabs">
+        <span class="ph-pill" id="ph-pill" aria-hidden="true"></span>
+        {tabs.map(([id, label], i) => (
+          <button class="ph-tab" type="button" role="tab" id={`ph-t-${id}`} aria-controls={`ph-p-${id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-tab={id}>{label}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-estrutura" aria-labelledby="ph-t-estrutura" tabindex="0">
+      <div class="ph-intro">
+        <h3>A história da MO2 vira prova.</h3>
+        <p class="ph-when">Mês 1, sem custo</p>
+        <p>O perfil passa a falar com o creator e mostra uma rede que já funciona. As campanhas do passado viram cases.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Posicionamento</b><span>A MO2 como o lugar onde o creator encontra campanha. A Mírian ensina, a MO2 conecta.</span></li>
+        <li><b>Perfil refeito</b><span>Nome, bio, destaques e link.</span></li>
+        <li><b>Acervo organizado</b><span>Levantamento de campanhas, fotos, vídeos, números e marcas atendidas, para virar case.</span></li>
+        <li><b>Requisitos de cadastro</b><span>Definidos com a Mírian: o mínimo para um perfil fazer parte da rede.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-site" aria-labelledby="ph-t-site" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>O mapa da rede de creators.</h3>
+        <p class="ph-when">Mês 1</p>
+        <p>O creator vê que a rede é real e quer fazer parte. A marca filtra o que precisa e pede uma campanha direto pelo site.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Mapa do Brasil</b><span>Os creators da rede por cidade, nicho e faixa de seguidores. Sem nomes.</span></li>
+        <li><b>Filtros</b><span>Por nicho, região e tamanho.</span></li>
+        <li><b>Pedido de marca</b><span>Formulário para a marca montar uma campanha a partir do que encontrou no mapa.</span></li>
+        <li><b>Migração</b><span>Os creators atuais da MO2 entram na base.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-cadastro" aria-labelledby="ph-t-cadastro" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>A porta aberta, com critério.</h3>
+        <p class="ph-when">A partir do mês 1, todos os dias</p>
+        <p>O cadastro verifica automaticamente se o perfil cumpre os requisitos mínimos. Quem ainda não cumpre é orientado sobre como chegar lá.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Verificação automática</b><span>Seguidores reais, engajamento e atividade recente.</span></li>
+        <li><b>Mapa atualizado</b><span>Cada creator aprovado entra no mapa da rede.</span></li>
+        <li><b>Caminho para quem não passou</b><span>Orientação para chegar aos requisitos, levando aos conteúdos e produtos da Mírian.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-conteudo" aria-labelledby="ph-t-conteudo" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>Cases, depoimentos e oportunidades.</h3>
+        <p class="ph-when">A partir do mês 2, todo mês</p>
+        <p>O conteúdo sai do acervo da MO2 e dos depoimentos de creators e marcas que trabalharam com ela.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Plano do mês</b><span>A pauta do mês, a partir do acervo e das campanhas abertas.</span></li>
+        <li><b>12 roteiros de vídeo</b><span>Para a MO2 gravar: cases, depoimentos, bastidores e oportunidades.</span></li>
+        <li><b>4 carrosséis</b><span>Prontos para publicar.</span></li>
+        <li><b>Depoimentos</b><span>Roteiro de coleta de depoimentos de creators e de marcas.</span></li>
+        <li><b>Relatório mensal</b><span>Creators cadastrados por região e nicho, e pedidos de marcas vindos do site.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-beta" aria-labelledby="ph-t-beta" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>Edição de vídeos com IA, em Beta.</h3>
+        <p class="ph-when">Em paralelo, durante o projeto</p>
+        <p>Vamos usar com a MO2 a versão Beta do nosso sistema de edição de vídeos com IA. Quando o sistema estiver validado, a edição passa a fazer parte do projeto.</p>
+        <p>Enquanto isso, o ideal é que a MO2 mantenha um editor para os vídeos. O Beta funciona em paralelo, sem prazo nem quantidade garantidos.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Agora</b><span>A MO2 grava e o editor dela edita. O Beta roda em paralelo.</span></li>
+        <li><b>Depois da validação</b><span>A edição entra no projeto.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initPhases } from '../scripts/phases';
+  initPhases();
+</script>

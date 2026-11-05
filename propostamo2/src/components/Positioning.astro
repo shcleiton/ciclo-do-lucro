@@ -1,0 +1,29 @@
+---
+import { posDefs, posThread } from '../data/content';
+---
+<section id="posicionamento" class="pos-sec" aria-labelledby="pos-h">
+  <div class="wrap">
+    <div class="head" data-rv>
+      <h2 id="pos-h">A MO2 já fez. Falta mostrar.</h2>
+      <p class="lead">A MO2 tem campanhas com Johnson’s, Hellmann’s e Sanofi, mais de 500 influenciadores em campanhas e 20 anos da Mírian do lado de quem contrata. O perfil ainda não mostra isso: fala com creators, especialistas e quem procura social media ao mesmo tempo, e a base de creators não está organizada. Ao mesmo tempo, marcas de e-commerce e do TikTok Shop procuram creators pequenos, em volume e em todo o Brasil.</p>
+    </div>
+    <div class="pos-band"><div class="pos-band-bar" aria-hidden="true"></div><p class="pos-band-k"><span>Mês 1</span><span>Os 6 meses do contrato</span></p></div>
+    <div class="pos-defs" data-rv>
+      {posDefs.map((p) => (
+        <div class="pos-def">
+          <h3>{p.name}</h3>
+          <p>{p.text}</p>
+          <p class="pos-ask">{p.ask}</p>
+        </div>
+      ))}
+    </div>
+    <div class="pos-thread-wrap">
+      <h3>Como o projeto avança</h3>
+      <ol class="pos-thread" data-rv>
+        {posThread.map((t) => (
+          <li class:list={{ 'is-origin': t.origin }}><b>{t.title}</b><span>{t.phase}</span></li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

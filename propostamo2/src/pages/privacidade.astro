@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import { GA4_ID } from '../data/site';
+import { withBase } from '../data/paths';
+---
+<Base title="Política de privacidade · Ciclo do Lucro" description="Como o site do Ciclo do Lucro, da CR CODE, trata dados de visitantes.">
+  <header class="hd">
+    <div class="wrap hd-in"><a class="hd-mark" href={withBase()}><Logo />CR <span>CODE</span></a></div>
+  </header>
+  <main id="conteudo" class="priv">
+    <div class="wrap">
+      <h1>Política de privacidade</h1>
+      <p>Este site explica o método Ciclo do Lucro, da CR CODE. Ele não tem formulário e não pede seus dados.</p>
+      <h2>O que medimos</h2>
+      {GA4_ID ? <p>Se você aceitar no aviso de cookies, usamos o Google Analytics para entender como a página é lida. Sem o aceite, ele não carrega.</p> : <p>Hoje esta página não usa ferramenta de medição nem cookies.</p>}
+      <h2>WhatsApp</h2>
+      <p>Ao tocar em "Conversar no WhatsApp", você abre uma conversa com o Cleiton Ramos. O que você enviar lá segue as regras do próprio WhatsApp e é usado só para responder ao seu contato.</p>
+      <h2>Seus direitos</h2>
+      <p>Pela LGPD, você pode pedir acesso, correção ou exclusão de dados a qualquer momento, pelo mesmo WhatsApp.</p>
+      <p><a href={withBase()}>Voltar ao Ciclo do Lucro</a></p>
+    </div>
+  </main>
+</Base>
+<style>
+  .priv { padding-block: clamp(48px, 8vw, 96px); }
+  .priv .wrap { max-width: 720px; }
+  .priv h1 { font-size: clamp(2rem, 5vw, 3rem); font-stretch: 118%; font-weight: 720; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .priv h2 { font-size: 1.3rem; margin: 36px 0 10px; }
+  .priv p { color: var(--mist); margin-top: 10px; }
+</style>

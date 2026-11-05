@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Positioning from '../components/Positioning.astro';
+import Cycle from '../components/Cycle.astro';
+import Phases from '../components/Phases.astro';
+import Quote from '../components/Quote.astro';
+import Roles from '../components/Roles.astro';
+import Price from '../components/Price.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import Consent from '../components/Consent.astro';
+---
+<Base>
+  <Header />
+  <main id="conteudo">
+    <Hero />
+    <Positioning />
+    <Cycle />
+    <Phases />
+    <Quote />
+    <Roles />
+    <Price />
+    <Contact />
+  </main>
+  <Footer />
+  <Consent />
+</Base>
+
+<script>
+  import { initRing } from '../scripts/ring';
+  import { initNav } from '../scripts/nav';
+  import { initReveal } from '../scripts/reveal';
+  initRing();
+  initNav();
+  initReveal();
+</script>
