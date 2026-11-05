@@ -1,0 +1,45 @@
+---
+import { ladder } from '../data/content';
+const s0 = ladder[0];
+---
+<section id="escada" class="ld-sec" aria-labelledby="escada-h">
+  <div class="wrap">
+    <div class="head" data-rv>
+      <h2 id="escada-h">Uma escada de produtos digitais.</h2>
+      <p class="lead">Hoje você vende high ticket no presencial e não tem nada para oferecer a quem ainda não chegou nesse nível. Cada degrau resolve um problema do criador e prepara a pessoa para o próximo. Toque num degrau para ver o que ele entrega.</p>
+    </div>
+
+    <div class="ld-grid">
+      <ol class="ld-stair" id="ld-stair" aria-label="Degraus da escada" data-steps={JSON.stringify(ladder)}>
+        {ladder.map((s, i) => (
+          <li style={`--i:${i}`}>
+            <button type="button" class:list={['ld-step', { 'is-open': s.open }]} data-i={i} aria-pressed={i === 0 ? 'true' : 'false'}>
+              <span class="ld-lv">{s.level}</span>
+              <span class="ld-nm">{s.name}</span>
+              <span class="ld-pr">{s.price}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+
+      <aside class="ld-detail" aria-live="polite">
+        <div class="ld-txt" id="ld-txt">
+          <p class="ld-d-lv" id="ld-lv">{s0.level}</p>
+          <h3 id="ld-name">{s0.name}</h3>
+          <p class="ld-d-pr"><span id="ld-price">{s0.price}</span><small id="ld-note">{s0.priceNote ?? ''}</small></p>
+          <dl>
+            <div><dt>O que entrega</dt><dd id="ld-gives">{s0.gives}</dd></div>
+            <div><dt>Função na escada</dt><dd id="ld-role">{s0.role}</dd></div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+
+    <p class="ld-foot">Os nomes dos produtos são provisórios e podem mudar ao longo da construção. Os produtos de entrada existem para pagar o anúncio e formar a base que chega ao Programa. A sua mentoria individual continua no topo.</p>
+  </div>
+</section>
+
+<script>
+  import { initLadder } from '../scripts/ladder';
+  initLadder();
+</script>

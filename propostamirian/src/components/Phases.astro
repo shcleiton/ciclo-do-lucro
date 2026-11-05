@@ -1,0 +1,141 @@
+---
+const tabs = [
+  ['posicionar', 'Posicionar'],
+  ['atrair', 'Atrair'],
+  ['produtos', 'Produtos'],
+  ['vender', 'Vender todo dia'],
+  ['perpetuo', 'Setup do perpétuo'],
+  ['pico', 'Pico'],
+  ['operar', 'Operar e medir'],
+];
+---
+<section id="entregas" aria-labelledby="entregas-h">
+  <div class="wrap">
+    <div class="head" data-rv>
+      <h2 id="entregas-h">O que eu entrego, etapa por etapa.</h2>
+      <p class="lead">38 entregas em 7 blocos, na ordem do Ciclo do Lucro.</p>
+    </div>
+    <div class="ph-scroll">
+      <div class="ph-tabs" role="tablist" aria-label="Entregas por etapa" id="ph-tabs">
+        <span class="ph-pill" id="ph-pill" aria-hidden="true"></span>
+        {tabs.map(([id, label], i) => (
+          <button class="ph-tab" type="button" role="tab" id={`ph-t-${id}`} aria-controls={`ph-p-${id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-tab={id}>{label}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-posicionar" aria-labelledby="ph-t-posicionar" tabindex="0">
+      <div class="ph-intro">
+        <h3>Tudo sai da tese.</h3>
+        <p class="ph-when">Semanas 1 e 2</p>
+        <p>Antes do primeiro Reel, a promessa, o público e o diferencial ficam definidos. A escada de produtos nasce do mesmo lugar.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Estratégia de posicionamento</b><span>Tese, promessa, público e diferencial.</span></li>
+        <li><b>Linhas editoriais</b><span>O lado da marca, dinheiro e bastidores. Cada conteúdo cabe numa delas.</span></li>
+        <li><b>Escada de produtos</b><span>Arquitetura dos degraus e das ofertas, do Kit ao Programa. <a href="#escada">Ver a escada</a></span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-atrair" aria-labelledby="ph-t-atrair" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>Volume, dentro do posicionamento.</h3>
+        <p class="ph-when">Do primeiro dia ao fim do contrato</p>
+        <p>Reels curtos com texto na tela, vídeos de autoridade com você falando e carrosséis. Você grava em lote, um dia por mês.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Plano de conteúdo</b><span>90 dias de pauta, divididos pelas linhas editoriais.</span></li>
+        <li><b>Pauta da gravação</b><span>O roteiro do dia de gravação em lote, para você chegar sabendo o que falar.</span></li>
+        <li><b>Roteiros</b><span>Reels curtos e vídeos de autoridade.</span></li>
+        <li><b>Carrosséis</b><span>Prontos para publicar.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-produtos" aria-labelledby="ph-t-produtos" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>Os produtos saem do seu conhecimento.</h3>
+        <p class="ph-when">Semanas 1 a 6</p>
+        <p>Eu estruturo e produzo a partir do que você sabe. Você grava as aulas e aprova.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Kit Primeiro Contrato</b><span>Media kit, tabela de preço, mensagem para abordar marca e modelo de contrato, com o roteiro da aula de 30 a 40 minutos.</span></li>
+        <li><b>Respostas Prontas de Negociação</b><span>As respostas e o roteiro da aula de 15 a 25 minutos.</span></li>
+        <li><b>Perfil Contratável</b><span>Desenvolvimento da skill e roteiro das aulas de posicionamento e de uso. Na aula de uso, eu conduzo a parte técnica.</span></li>
+        <li><b>Programa</b><span>Estrutura dos 6 encontros: temas, tarefas e dinâmica do hot seat.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-vender" aria-labelledby="ph-t-vender" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>Um funil aberto todos os dias.</h3>
+        <p class="ph-when">A partir da semana 3</p>
+        <p>O Kit entra no perpétuo com o order bump no checkout e o Perfil Contratável oferecido logo depois da compra.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Funil do Kit</b><span>Kit, order bump das Respostas e upsell do Perfil Contratável.</span></li>
+        <li><b>Páginas</b><span>Página de vendas e checkout.</span></li>
+        <li><b>Entrega</b><span>Entrega automática dos produtos e área de membros configurada.</span></li>
+        <li><b>Recuperação</b><span>Carrinho abandonado e Pix ou boleto não pagos.</span></li>
+        <li><b>Nutrição</b><span>Sequência de e-mails para quem comprou, preparando o próximo degrau.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-perpetuo" aria-labelledby="ph-t-perpetuo" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>O Ciclo do Lucro aplicado ao perpétuo.</h3>
+        <p class="ph-when">Semanas 1 a 3, com ajuste toda semana</p>
+        <p>O conteúdo aquece. O tráfego distribui. Quem assistiu forma um público aquecido, e a oferta vai principalmente para ele.</p>
+        <p>Os públicos formados aqui são os mesmos que recebem a captação do evento. Quando o lançamento chega, já existe uma base esperando o convite.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Rastreamento</b><span>Pixel e API de conversões da Meta, com os eventos de visita, checkout e compra.</span></li>
+        <li><b>Públicos aquecidos</b><span>Engajamento no Instagram, visualização de vídeo e visitantes das páginas.</span></li>
+        <li><b>Distribuição</b><span>Campanhas com os melhores conteúdos, para quem ainda não conhece você.</span></li>
+        <li><b>Remarketing</b><span>A oferta do Kit para o público aquecido.</span></li>
+        <li><b>Público frio</b><span>Uma parte menor da verba, com o produto de entrada.</span></li>
+        <li><b>Ascensão</b><span>Exclusão de quem já comprou e remarketing do Perfil Contratável para os compradores do Kit.</span></li>
+        <li><b>Criativos</b><span>Peças para os anúncios.</span></li>
+        <li><b>Gestão do tráfego</b><span>O caixa dos produtos de entrada volta para o anúncio.</span></li>
+      </ul>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-pico" aria-labelledby="ph-t-pico" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>O Programa é vendido ao vivo.</h3>
+        <p class="ph-when">Semanas 6 a 13</p>
+        <p>Um evento de 3 dias, com o carrinho aberto só no terceiro. Antes da captação vem o aquecimento, a etapa que mais gente pula.</p>
+      </div>
+      <ol class="ph-steps">
+        <li><div><b>Planejamento</b><p>Calendário, metas e divisão da verba.</p></div></li>
+        <li><div><b>Aquecimento</b><p>Conteúdo antes da captação, para o público chegar sabendo quem você é.</p></div></li>
+        <li><div><b>Captação</b><p>Página de inscrição do evento e campanhas de captação.</p></div></li>
+        <li><div><b>Grupos de WhatsApp</b><p>Os grupos do evento, com a sequência de mensagens.</p></div></li>
+        <li><div><b>E-mails</b><p>Confirmação, lembretes e conteúdo.</p></div></li>
+        <li><div><b>Roteiro do evento</b><span class="ph-d">3 dias</span><p>Roteiro e narrativa de cada dia.</p></div></li>
+        <li><div><b>Oferta</b><p>Bônus, garantia e condição da turma fundadora.</p></div></li>
+        <li><div><b>Página de vendas</b><p>Página do Programa e checkout.</p></div></li>
+        <li><div><b>Remarketing</b><p>Durante o evento e com o carrinho aberto.</p></div></li>
+        <li><div><b>Carrinho</b><p>Sequência por e-mail e WhatsApp até o fechamento.</p></div></li>
+        <li><div><b>Debrief</b><p>Números e ajustes para o próximo ciclo.</p></div></li>
+      </ol>
+    </div>
+
+    <div class="ph-panel" role="tabpanel" id="ph-p-operar" aria-labelledby="ph-t-operar" tabindex="0" hidden>
+      <div class="ph-intro">
+        <h3>Os números são lidos toda semana.</h3>
+        <p class="ph-when">Toda semana, do primeiro anúncio ao fim do contrato</p>
+        <p>Você acompanha tudo no painel, e a gente conversa 30 minutos por semana para decidir o que ajustar.</p>
+      </div>
+      <ul class="ph-rows">
+        <li><b>Operação do perpétuo</b><span>Otimização das campanhas, troca de criativos e testes de página.</span></li>
+        <li><b>Painel de resultados</b><span>Vendas, custo por venda, conteúdo e públicos num painel interativo.</span></li>
+        <li><b>Placar semanal</b><span>30 minutos para ler os números e decidir o próximo passo.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initPhases } from '../scripts/phases';
+  initPhases();
+</script>
